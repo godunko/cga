@@ -1,0 +1,12 @@
+--
+--  Copyright (C) 2023, Vadim Godunko <vgodunko@gmail.com>
+--
+--  SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+--
+
+project CGK is
+
+   for Source_Dirs use ("../source");
+   for Object_Dir use "../.obj";
+
+end CGK;
