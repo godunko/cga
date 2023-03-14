@@ -6,6 +6,16 @@
 
 package body CGK.Primitives.Circles_2D is
 
+   ------------
+   -- Center --
+   ------------
+
+   function Center
+     (Self : Circle_2D) return CGK.Primitives.Points_2D.Point_2D is
+   begin
+      return Self.Center;
+   end Center;
+
    ----------------------
    -- Create_Circle_2D --
    ----------------------
@@ -14,8 +24,17 @@ package body CGK.Primitives.Circles_2D is
      (X : CGK.Real; Y : CGK.Real; Radius : CGK.Real) return Circle_2D is
    begin
       return
-        (Position => CGK.Primitives.Points_2D.Create_Point_2D (X, Y),
-         Radius   => Radius);
+        (Center => CGK.Primitives.Points_2D.Create_Point_2D (X, Y),
+         Radius => Radius);
    end Create_Circle_2D;
+
+   ------------
+   -- Radius --
+   ------------
+
+   function Radius (Self : Circle_2D) return CGK.Real is
+   begin
+      return Self.Radius;
+   end Radius;
 
 end CGK.Primitives.Circles_2D;

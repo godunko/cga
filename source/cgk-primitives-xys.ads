@@ -14,6 +14,17 @@ package CGK.Primitives.XYs is
 
    function Create_XY (X : CGK.Real; Y : CGK.Real) return XY with Inline;
 
+   function X (Self : XY) return CGK.Real with Inline;
+   --  Returns X coordinate.
+
+   function Y (Self : XY) return CGK.Real with Inline;
+   --  Returns Y coordinate.
+
+   function "-" (Self : XY) return XY with Inline;
+
+   function "-" (Left : XY; Right : XY) return XY with Inline;
+   --  Subtract components
+
 private
 
    type XY is record
