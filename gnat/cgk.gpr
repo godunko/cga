@@ -9,4 +9,13 @@ project CGK is
    for Source_Dirs use ("../source");
    for Object_Dir use "../.obj";
 
+   package Compiler is
+      for Switches ("Ada") use 
+        ("-g",
+         "-gnat2022",
+         "-gnatym",
+         "-gnatyo",
+         "-gnatwa");
+   end Compiler;
+
 end CGK;
