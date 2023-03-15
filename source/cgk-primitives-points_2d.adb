@@ -4,15 +4,19 @@
 --  SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 --
 
+with CGK.Reals.Elementary_Functions;
+
 package body CGK.Primitives.Points_2D is
 
    use CGK.Primitives.XYs;
+   use CGK.Reals;
 
    ---------------------
    -- Create_Point_2D --
    ---------------------
 
-   function Create_Point_2D (X : CGK.Real; Y : CGK.Real) return Point_2D is
+   function Create_Point_2D
+     (X : CGK.Reals.Real; Y : CGK.Reals.Real) return Point_2D is
    begin
       return (Coordinates => Create_XY (X, Y));
    end Create_Point_2D;
@@ -23,7 +27,7 @@ package body CGK.Primitives.Points_2D is
 
    function Distance
      (Point_1 : Point_2D;
-      Point_2 : Point_2D) return CGK.Real
+      Point_2 : Point_2D) return CGK.Reals.Real
    is
       DX : constant Real := X (Point_1.Coordinates) - X (Point_2.Coordinates);
       DY : constant Real := Y (Point_1.Coordinates) - Y (Point_2.Coordinates);
@@ -36,7 +40,7 @@ package body CGK.Primitives.Points_2D is
    -- X --
    -------
 
-   function X (Self : Point_2D) return CGK.Real is
+   function X (Self : Point_2D) return CGK.Reals.Real is
    begin
       return X (Self.Coordinates);
    end X;
@@ -54,7 +58,7 @@ package body CGK.Primitives.Points_2D is
    -- Y --
    -------
 
-   function Y (Self : Point_2D) return CGK.Real is
+   function Y (Self : Point_2D) return CGK.Reals.Real is
    begin
       return Y (Self.Coordinates);
    end Y;

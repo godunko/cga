@@ -21,7 +21,9 @@ package body CGK.Primitives.Circles_2D is
    ----------------------
 
    function Create_Circle_2D
-     (X : CGK.Real; Y : CGK.Real; Radius : CGK.Real) return Circle_2D is
+     (X      : CGK.Reals.Real;
+      Y      : CGK.Reals.Real;
+      Radius : CGK.Reals.Real) return Circle_2D is
    begin
       return
         (Center => CGK.Primitives.Points_2D.Create_Point_2D (X, Y),
@@ -32,7 +34,7 @@ package body CGK.Primitives.Circles_2D is
    -- Radius --
    ------------
 
-   function Radius (Self : Circle_2D) return CGK.Real is
+   function Radius (Self : Circle_2D) return CGK.Reals.Real is
    begin
       return Self.Radius;
    end Radius;

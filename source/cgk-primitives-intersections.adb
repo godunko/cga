@@ -5,12 +5,14 @@
 --
 
 with CGK.Primitives.Vectors_2D;
+with CGK.Reals.Elementary_Functions;
 
 package body CGK.Primitives.Intersections is
 
    use CGK.Primitives.Circles_2D;
    use CGK.Primitives.Points_2D;
    use CGK.Primitives.Vectors_2D;
+   use CGK.Reals;
 
    procedure Invalidate (Self : in out Intersection);
    --  Invalidate state of the object

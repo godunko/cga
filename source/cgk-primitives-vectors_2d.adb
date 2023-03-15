@@ -21,7 +21,8 @@ package body CGK.Primitives.Vectors_2D is
    -- Create_Vector_2D --
    ----------------------
 
-   function Create_Vector_2D (X : CGK.Real; Y : CGK.Real) return Vector_2D is
+   function Create_Vector_2D
+     (X : CGK.Reals.Real; Y : CGK.Reals.Real) return Vector_2D is
    begin
       return (Coordinates => Create_XY (X, Y));
    end Create_Vector_2D;
@@ -42,7 +43,7 @@ package body CGK.Primitives.Vectors_2D is
    -- X --
    -------
 
-   function X (Self : Vector_2D) return CGK.Real is
+   function X (Self : Vector_2D) return CGK.Reals.Real is
    begin
       return X (Self.Coordinates);
    end X;
@@ -51,7 +52,7 @@ package body CGK.Primitives.Vectors_2D is
    -- Y --
    -------
 
-   function Y (Self : Vector_2D) return CGK.Real is
+   function Y (Self : Vector_2D) return CGK.Reals.Real is
    begin
       return Y (Self.Coordinates);
    end Y;
