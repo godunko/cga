@@ -10,12 +10,15 @@ with CGK.Reals.Elementary_Functions;
 package body CGK.Primitives.Intersections is
 
    use CGK.Primitives.Circles_2D;
+   use CGK.Primitives.Lines_2D;
    use CGK.Primitives.Points_2D;
    use CGK.Primitives.Vectors_2D;
    use CGK.Reals;
 
    procedure Invalidate (Self : in out Intersection);
    --  Invalidate state of the object
+
+   procedure Swap (A : in out Real; B : in out Real) with Inline;
 
    -------------------------
    -- Create_Intersection --
@@ -80,6 +83,94 @@ package body CGK.Primitives.Intersections is
 
       return Self.Length;
    end Length;
+
+   -------------
+   -- Perform --
+   -------------
+
+   procedure Perform
+     (Self   : in out Intersection;
+      Line_1 : CGK.Primitives.Lines_2D.Line_2D;
+      Line_2 : CGK.Primitives.Lines_2D.Line_2D)
+   is
+      A1,  B1,  C1  : Real;
+      A2,  B2,  C2  : Real;
+      AL1, BE1, GA1 : Real;
+      AL2, BE2, GA2 : Real;
+      Det           : Real;
+      Rap           : Real;
+      Denom         : Real;
+      XS            : Real;
+      YS            : Real;
+
+   begin
+      Invalidate (Self);
+
+      Coefficients (Line_1, A1, B1, C1);
+      Coefficients (Line_2, A2, B2, C2);
+
+      Det := Real'Max (abs A1, Real'Max (abs A2, Real'Max (abs B1, abs B2)));
+
+      if abs A1 = Det then
+         AL1 := A1;
+         BE1 := B1;
+         GA1 := C1;
+         AL2 := A2;
+         BE2 := B2;
+         GA2 := C2;
+
+      elsif abs B1 = Det then
+         AL1 := B1;
+         BE1 := A1;
+         GA1 := C1;
+         AL2 := B2;
+         BE2 := A2;
+         GA2 := C2;
+
+      elsif abs A2 = Det then
+         AL1 := A2;
+         BE1 := B2;
+         GA1 := C2;
+         AL2 := A1;
+         BE2 := B1;
+         GA2 := C1;
+
+      else
+         AL1 := B2;
+         BE1 := A2;
+         GA1 := C2;
+         AL2 := B1;
+         BE2 := A1;
+         GA2 := C1;
+      end if;
+
+      Rap   := AL2 / AL1;
+      Denom := BE2 - Rap * BE1;
+
+      if abs Denom <= Real'Model_Epsilon then
+         Self.Parallel  := True;
+         Self.Identical := abs (GA2 - Rap * GA1) <= Real'Model_Epsilon;
+         Self.Length    := 0;
+
+      else
+         Self.Parallel  := False;
+         Self.Identical := False;
+         Self.Length    := 1;
+
+         XS := (BE1 * GA2 / AL1 - BE2 * GA1 / AL1) / Denom;
+         YS := (Rap * GA1 - GA2) / Denom;
+
+         if (abs A1 /= Det and abs B1 = Det)
+           or (abs A1 /= Det and abs B1 /= Det and abs A2 /= Det)
+         then
+            Swap (XS, YS);
+         end if;
+
+         Self.Points (1) := Create_Point_2D (XS, YS);
+      end if;
+
+      Self.Valid := True;
+   end Perform;
 
    -------------
    -- Perform --
@@ -232,5 +323,17 @@ package body CGK.Primitives.Intersections is
 
       return Self.Points (1 .. Self.Length);
    end Points;
+
+   ----------
+   -- Swap --
+   ----------
+
+   procedure Swap (A : in out Real; B : in out Real) is
+      C : constant Real := A;
+
+   begin
+      A := B;
+      B := C;
+   end Swap;
 
 end CGK.Primitives.Intersections;

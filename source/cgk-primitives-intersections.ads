@@ -5,6 +5,7 @@
 --
 
 with CGK.Primitives.Circles_2D;
+with CGK.Primitives.Lines_2D;
 with CGK.Primitives.Points_2D;
 
 package CGK.Primitives.Intersections is
@@ -16,6 +17,11 @@ package CGK.Primitives.Intersections is
    function Create_Intersection
      (Circle_1 : CGK.Primitives.Circles_2D.Circle_2D;
       Circle_2 : CGK.Primitives.Circles_2D.Circle_2D) return Intersection;
+
+   procedure Perform
+     (Self   : in out Intersection;
+      Line_1 : CGK.Primitives.Lines_2D.Line_2D;
+      Line_2 : CGK.Primitives.Lines_2D.Line_2D);
 
    procedure Perform
      (Self     : in out Intersection;

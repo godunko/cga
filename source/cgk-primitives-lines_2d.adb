@@ -7,6 +7,26 @@
 package body CGK.Primitives.Lines_2D is
 
    use CGK.Primitives.Axes_2D;
+   use CGK.Primitives.Directions_2D;
+   use CGK.Primitives.Points_2D;
+   use CGK.Reals;
+
+   ------------------
+   -- Coefficients --
+   ------------------
+
+   procedure Coefficients
+     (Self : Line_2D;
+      A    : out CGK.Reals.Real;
+      B    : out CGK.Reals.Real;
+      C    : out CGK.Reals.Real) is
+   begin
+      A := Y (Direction (Self.Position));
+      B := -X (Direction (Self.Position));
+      C :=
+        -(A * X (Location (Self.Position))
+            + B * Y (Location (Self.Position)));
+   end Coefficients;
 
    --------------------
    -- Create_Line_2D --
