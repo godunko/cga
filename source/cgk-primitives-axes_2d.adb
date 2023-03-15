@@ -17,4 +17,24 @@ package body CGK.Primitives.Axes_2D is
       return (Location => Point, Direction => Direction);
    end Create_Axis_2D;
 
+   ---------------
+   -- Direction --
+   ---------------
+
+   function Direction
+     (Self : Axis_2D) return CGK.Primitives.Directions_2D.Direction_2D is
+   begin
+      return Self.Direction;
+   end Direction;
+
+   --------------
+   -- Location --
+   --------------
+
+   function Location
+     (Self : Axis_2D) return CGK.Primitives.Points_2D.Point_2D is
+   begin
+      return Self.Location;
+   end Location;
+
 end CGK.Primitives.Axes_2D;

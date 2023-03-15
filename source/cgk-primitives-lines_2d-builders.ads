@@ -7,6 +7,7 @@
 --  Advanced algorithms to create Line_2D.
 
 with CGK.Primitives.Points_2D;
+with CGK.Reals;
 
 package CGK.Primitives.Lines_2D.Builders is
 
@@ -19,6 +20,17 @@ package CGK.Primitives.Lines_2D.Builders is
       Point_1 : CGK.Primitives.Points_2D.Point_2D;
       Point_2 : CGK.Primitives.Points_2D.Point_2D);
    --  Make Line_2D that passing through two Point_2D.
+
+   procedure Make
+     (Self     : in out Line_2D_Builder;
+      Line     : Line_2D;
+      Distance : CGK.Reals.Real);
+   --  Make Line_2D parallel to given line on given distance.
+
+   function Line (Self : Line_2D_Builder) return Line_2D;
+   --  Retuns constructed line.
+   --
+   --  @exception Invalid_State_Error
 
 private
 

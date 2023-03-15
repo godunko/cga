@@ -20,6 +20,15 @@ package CGK.Primitives.Lines_2D is
      (Point     : CGK.Primitives.Points_2D.Point_2D;
       Direction : CGK.Primitives.Directions_2D.Direction_2D) return Line_2D;
 
+   function Location
+     (Self : Line_2D) return CGK.Primitives.Points_2D.Point_2D with Inline;
+   --  Returns location point (origin) of the line.
+
+   function Direction
+     (Self : Line_2D)
+      return CGK.Primitives.Directions_2D.Direction_2D with Inline;
+   --  Returns the direction of the line.
+
 private
 
    type Line_2D is record

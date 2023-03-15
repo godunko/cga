@@ -37,4 +37,22 @@ package body CGK.Primitives.Directions_2D is
       return Create_Direction_2D (X (XY), Y (XY));
    end Create_Direction_2D;
 
+   -------
+   -- X --
+   -------
+
+   function X (Self : Direction_2D) return CGK.Reals.Real is
+   begin
+      return X (Self.Coordinates);
+   end X;
+
+   -------
+   -- Y --
+   -------
+
+   function Y (Self : Direction_2D) return CGK.Reals.Real is
+   begin
+      return Y (Self.Coordinates);
+   end Y;
+
 end CGK.Primitives.Directions_2D;

@@ -9,6 +9,24 @@ package body CGK.Primitives.XYs is
    use CGK.Reals;
 
    ---------
+   -- "*" --
+   ---------
+
+   function "*" (Left : CGK.Reals.Real; Right : XY) return XY is
+   begin
+      return (Left * Right.X, Left * Right.Y);
+   end "*";
+
+   ---------
+   -- "+" --
+   ---------
+
+   function "+" (Left : XY; Right : XY) return XY is
+   begin
+      return (Left.X + Right.X, Left.Y + Right.Y);
+   end "+";
+
+   ---------
    -- "-" --
    ---------
 

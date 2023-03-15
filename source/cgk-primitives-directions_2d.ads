@@ -21,6 +21,12 @@ package CGK.Primitives.Directions_2D is
    function Create_Direction_2D
      (XY : CGK.Primitives.XYs.XY) return Direction_2D;
 
+   function X (Self : Direction_2D) return CGK.Reals.Real with Inline;
+   --  Returns X coordinate.
+
+   function Y (Self : Direction_2D) return CGK.Reals.Real with Inline;
+   --  Returns Y coordinate.
+
 private
 
    type Direction_2D is record

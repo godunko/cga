@@ -21,6 +21,15 @@ package body CGK.Primitives.Points_2D is
       return (Coordinates => Create_XY (X, Y));
    end Create_Point_2D;
 
+   ---------------------
+   -- Create_Point_2D --
+   ---------------------
+
+   function Create_Point_2D (XY : CGK.Primitives.XYs.XY) return Point_2D is
+   begin
+      return (Coordinates => XY);
+   end Create_Point_2D;
+
    --------------
    -- Distance --
    --------------

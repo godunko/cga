@@ -5,7 +5,6 @@
 --
 
 with CGK.Primitives.XYs;
-with CGK.Reals;
 
 package body CGK.Primitives.Lines_2D.Builders is
 
@@ -13,6 +12,17 @@ package body CGK.Primitives.Lines_2D.Builders is
    use CGK.Primitives.Points_2D;
    use CGK.Primitives.XYs;
    use CGK.Reals;
+
+   ----------
+   -- Line --
+   ----------
+
+   function Line (Self : Line_2D_Builder) return Line_2D is
+   begin
+      Assert_Invalid_State_Error (Self.State = Valid);
+
+      return Self.Line;
+   end Line;
 
    ----------
    -- Make --
@@ -34,6 +44,24 @@ package body CGK.Primitives.Lines_2D.Builders is
       else
          Self.State := Confused_Points_Error;
       end if;
+   end Make;
+
+   ----------
+   -- Make --
+   ----------
+
+   procedure Make
+     (Self     : in out Line_2D_Builder;
+      Line     : Line_2D;
+      Distance : CGK.Reals.Real) is
+   begin
+      Self.Line :=
+        Create_Line_2D
+          (Create_Point_2D (Points_2D.XY (Location (Line))
+             + Distance
+                 * Create_XY (-Y (Direction (Line)), X (Direction (Line)))),
+           Direction (Line));
+      Self.State := Valid;
    end Make;
 
 end CGK.Primitives.Lines_2D.Builders;

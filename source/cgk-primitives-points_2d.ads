@@ -18,6 +18,9 @@ package CGK.Primitives.Points_2D is
    function Create_Point_2D
      (X : CGK.Reals.Real; Y : CGK.Reals.Real) return Point_2D with Inline;
 
+   function Create_Point_2D
+     (XY : CGK.Primitives.XYs.XY) return Point_2D with Inline;
+
    function X (Self : Point_2D) return CGK.Reals.Real with Inline;
    --  Returns X coordinate.
 

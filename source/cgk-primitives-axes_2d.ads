@@ -19,6 +19,15 @@ package CGK.Primitives.Axes_2D is
      (Point     : CGK.Primitives.Points_2D.Point_2D;
       Direction : CGK.Primitives.Directions_2D.Direction_2D) return Axis_2D;
 
+   function Location
+     (Self : Axis_2D) return CGK.Primitives.Points_2D.Point_2D with Inline;
+   --  Returns the origin of the axis.
+
+   function Direction
+     (Self : Axis_2D)
+      return CGK.Primitives.Directions_2D.Direction_2D with Inline;
+   --  Returns the direction of the axis.
+
 private
 
    type Axis_2D is record
