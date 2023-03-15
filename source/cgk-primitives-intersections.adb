@@ -12,6 +12,73 @@ package body CGK.Primitives.Intersections is
    use CGK.Primitives.Points_2D;
    use CGK.Primitives.Vectors_2D;
 
+   procedure Invalidate (Self : in out Intersection);
+   --  Invalidate state of the object
+
+   -------------------------
+   -- Create_Intersection --
+   -------------------------
+
+   function Create_Intersection
+     (Circle_1 : CGK.Primitives.Circles_2D.Circle_2D;
+      Circle_2 : CGK.Primitives.Circles_2D.Circle_2D) return Intersection is
+   begin
+      return Result : Intersection do
+         Perform (Result, Circle_1, Circle_2);
+      end return;
+   end Create_Intersection;
+
+   ----------------
+   -- Invalidate --
+   ----------------
+
+   procedure Invalidate (Self : in out Intersection) is
+   begin
+      Self.Valid := False;
+   end Invalidate;
+
+   ---------------------------
+   -- Is_Identical_Elements --
+   ---------------------------
+
+   function Is_Identical_Elements (Self : Intersection) return Boolean is
+   begin
+      Assert_Invalid_State_Error (Self.Valid);
+
+      return Self.Identical;
+   end Is_Identical_Elements;
+
+   --------------------------
+   -- Is_Parallel_Elements --
+   --------------------------
+
+   function Is_Parallel_Elements (Self : Intersection) return Boolean is
+   begin
+      Assert_Invalid_State_Error (Self.Valid);
+
+      return Self.Parallel;
+   end Is_Parallel_Elements;
+
+   --------------
+   -- Is_Valid --
+   --------------
+
+   function Is_Valid (Self : Intersection) return Boolean is
+   begin
+      return Self.Valid;
+   end Is_Valid;
+
+   ------------
+   -- Length --
+   ------------
+
+   function Length (Self : Intersection) return Natural is
+   begin
+      Assert_Invalid_State_Error (Self.Valid);
+
+      return Self.Length;
+   end Length;
+
    -------------
    -- Perform --
    -------------
@@ -28,19 +95,21 @@ package body CGK.Primitives.Intersections is
       Dif  : constant Real := abs (R1 - R2);
 
    begin
+      Invalidate (Self);
+
       if Dist <= Real'Model_Epsilon then
          --  Circles are parallel or identical, no intersection points
 
          Self.Parallel  := True;
          Self.Identical := Dif <= Real'Model_Epsilon;
-         Self.Number    := 0;
+         Self.Length    := 0;
 
       elsif Dist - Sum > Epsilon (Sum) then
          --  Circles are outside of each other, no intersection points
 
          Self.Parallel  := False;
          Self.Identical := False;
-         Self.Number    := 0;
+         Self.Length    := 0;
 
       elsif abs (Dist - Sum) <= Epsilon (Sum) then
          --  Circles are exterious, single tangential point
@@ -54,7 +123,7 @@ package body CGK.Primitives.Intersections is
          begin
             Self.Parallel  := False;
             Self.Identical := False;
-            Self.Number    := 1;
+            Self.Length    := 1;
 
             Self.Points (1) := Create_Point_2D (XS, YS);
          end;
@@ -76,7 +145,7 @@ package body CGK.Primitives.Intersections is
          begin
             Self.Parallel  := False;
             Self.Identical := False;
-            Self.Number    := 2;
+            Self.Length    := 2;
 
             L := (Dist * Dist + R1 * R1 - R2 * R2) / (2.0 * Dist);
             D := R1 * R1 - L * L;
@@ -108,7 +177,7 @@ package body CGK.Primitives.Intersections is
          begin
             Self.Parallel  := False;
             Self.Identical := False;
-            Self.Number    := 1;
+            Self.Length    := 1;
 
             if Radius (Circle_1) < Radius (Circle_2) then
                A := -A;
@@ -127,8 +196,39 @@ package body CGK.Primitives.Intersections is
       else
          Self.Parallel  := False;
          Self.Identical := False;
-         Self.Number    := 0;
+         Self.Length    := 0;
       end if;
+
+      Self.Valid := True;
    end Perform;
+
+   -----------
+   -- Point --
+   -----------
+
+   function Point
+     (Self : Intersection; Index : Positive)
+      return CGK.Primitives.Points_2D.Point_2D is
+   begin
+      Assert_Invalid_State_Error (Self.Valid);
+
+      if Self.Length < Index then
+         raise Constraint_Error;
+      end if;
+
+      return Self.Points (Index);
+   end Point;
+
+   ------------
+   -- Points --
+   ------------
+
+   function Points
+     (Self : Intersection) return CGK.Primitives.Points_2D.Point_2D_Array is
+   begin
+      Assert_Invalid_State_Error (Self.Valid);
+
+      return Self.Points (1 .. Self.Length);
+   end Points;
 
 end CGK.Primitives.Intersections;

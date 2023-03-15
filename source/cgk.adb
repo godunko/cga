@@ -19,6 +19,17 @@ package body CGK is
       end if;
    end Assert_Construction_Error;
 
+   --------------------------------
+   -- Assert_Invalid_State_Error --
+   --------------------------------
+
+   procedure Assert_Invalid_State_Error (Valid : Boolean) is
+   begin
+      if not Valid then
+         raise Invalid_State_Error;
+      end if;
+   end Assert_Invalid_State_Error;
+
    -------------
    -- Epsilon --
    -------------

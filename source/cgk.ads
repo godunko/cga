@@ -24,10 +24,16 @@ package CGK is
    package Elementary_Functions is
      new Ada.Numerics.Generic_Elementary_Functions (Real);
 
-   Construction_Error : exception;
+   Construction_Error  : exception;
+   --  Raised when construction can't be done.
+
+   Invalid_State_Error : exception;
+   --  Raised when object is not in valid state.
 
 private
 
    procedure Assert_Construction_Error (Value : Boolean);
+
+   procedure Assert_Invalid_State_Error (Valid : Boolean);
 
 end CGK;
