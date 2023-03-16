@@ -21,12 +21,20 @@ package body CGK.Primitives.Lines_2D is
       B    : out CGK.Reals.Real;
       C    : out CGK.Reals.Real) is
    begin
-      A := Y (Direction (Self.Position));
-      B := -X (Direction (Self.Position));
-      C :=
-        -(A * X (Location (Self.Position))
-            + B * Y (Location (Self.Position)));
+      A := Y (Direction (Self.Axis));
+      B := -X (Direction (Self.Axis));
+      C := -(A * X (Location (Self.Axis)) + B * Y (Location (Self.Axis)));
    end Coefficients;
+
+   --------------------
+   -- Create_Line_2D --
+   --------------------
+
+   function Create_Line_2D
+     (Axis : CGK.Primitives.Axes_2D.Axis_2D) return Line_2D is
+   begin
+      return (Axis => Axis);
+   end Create_Line_2D;
 
    --------------------
    -- Create_Line_2D --
@@ -36,7 +44,7 @@ package body CGK.Primitives.Lines_2D is
      (Point     : CGK.Primitives.Points_2D.Point_2D;
       Direction : CGK.Primitives.Directions_2D.Direction_2D) return Line_2D is
    begin
-      return (Position => Create_Axis_2D (Point, Direction));
+      return (Axis => Create_Axis_2D (Point, Direction));
    end Create_Line_2D;
 
    ---------------
@@ -46,7 +54,7 @@ package body CGK.Primitives.Lines_2D is
    function Direction
      (Self : Line_2D) return CGK.Primitives.Directions_2D.Direction_2D is
    begin
-      return Direction (Self.Position);
+      return Direction (Self.Axis);
    end Direction;
 
    --------------
@@ -56,7 +64,7 @@ package body CGK.Primitives.Lines_2D is
    function Location
      (Self : Line_2D) return CGK.Primitives.Points_2D.Point_2D is
    begin
-      return Location (Self.Position);
+      return Location (Self.Axis);
    end Location;
 
 end CGK.Primitives.Lines_2D;

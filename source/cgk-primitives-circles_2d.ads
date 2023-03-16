@@ -17,6 +17,10 @@ package CGK.Primitives.Circles_2D is
    type Circle_2D is private;
 
    function Create_Circle_2D
+     (Center : CGK.Primitives.Points_2D.Point_2D;
+      Radius : CGK.Reals.Real) return Circle_2D with Inline;
+
+   function Create_Circle_2D
      (X      : CGK.Reals.Real;
       Y      : CGK.Reals.Real;
       Radius : CGK.Reals.Real) return Circle_2D with Inline;

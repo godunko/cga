@@ -46,6 +46,15 @@ package body CGK.Primitives.Directions_2D is
       return X (Self.Coordinates);
    end X;
 
+   --------
+   -- XY --
+   --------
+
+   function XY (Self : Direction_2D) return CGK.Primitives.XYs.XY is
+   begin
+      return Self.Coordinates;
+   end XY;
+
    -------
    -- Y --
    -------

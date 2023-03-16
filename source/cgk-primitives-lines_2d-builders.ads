@@ -34,10 +34,8 @@ package CGK.Primitives.Lines_2D.Builders is
 
 private
 
-   type State_Kind is (Invalid, Valid, Confused_Points_Error);
-
    type Line_2D_Builder is record
-      State : State_Kind := Invalid;
+      State : CGK.Primitives.Builder_State_Kind := CGK.Primitives.Invalid;
       Line  : Line_2D;
    end record;
 

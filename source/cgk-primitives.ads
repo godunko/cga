@@ -8,4 +8,6 @@ package CGK.Primitives is
 
    pragma Pure;
 
+   type Builder_State_Kind is (Invalid, Valid, Confused_Points_Error);
+
 end CGK.Primitives;
