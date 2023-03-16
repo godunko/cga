@@ -12,7 +12,7 @@ package CGK.Primitives.Line_Segments_2D.Builders is
 
    type Line_Segment_2D_Builder is private;
 
-   procedure Make
+   procedure Build
      (Self    : in out Line_Segment_2D_Builder;
       Point_1 : CGK.Primitives.Points_2D.Point_2D;
       Point_2 : CGK.Primitives.Points_2D.Point_2D);

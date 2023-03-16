@@ -13,22 +13,11 @@ package body CGK.Primitives.Lines_2D.Builders is
    use CGK.Primitives.XYs;
    use CGK.Reals;
 
-   ----------
-   -- Line --
-   ----------
+   -----------
+   -- Build --
+   -----------
 
-   function Line (Self : Line_2D_Builder) return Line_2D is
-   begin
-      Assert_Invalid_State_Error (Self.State = Valid);
-
-      return Self.Line;
-   end Line;
-
-   ----------
-   -- Make --
-   ----------
-
-   procedure Make
+   procedure Build
      (Self    : in out Line_2D_Builder;
       Point_1 : CGK.Primitives.Points_2D.Point_2D;
       Point_2 : CGK.Primitives.Points_2D.Point_2D) is
@@ -44,13 +33,13 @@ package body CGK.Primitives.Lines_2D.Builders is
       else
          Self.State := Confused_Points_Error;
       end if;
-   end Make;
+   end Build;
 
-   ----------
-   -- Make --
-   ----------
+   -----------
+   -- Build --
+   -----------
 
-   procedure Make
+   procedure Build
      (Self     : in out Line_2D_Builder;
       Line     : Line_2D;
       Distance : CGK.Reals.Real) is
@@ -62,6 +51,17 @@ package body CGK.Primitives.Lines_2D.Builders is
                  * Create_XY (-Y (Direction (Line)), X (Direction (Line)))),
            Direction (Line));
       Self.State := Valid;
-   end Make;
+   end Build;
+
+   ----------
+   -- Line --
+   ----------
+
+   function Line (Self : Line_2D_Builder) return Line_2D is
+   begin
+      Assert_Invalid_State_Error (Self.State = Valid);
+
+      return Self.Line;
+   end Line;
 
 end CGK.Primitives.Lines_2D.Builders;

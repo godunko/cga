@@ -15,24 +15,11 @@ package body CGK.Primitives.Line_Segments_2D.Builders is
    use CGK.Primitives.XYs;
    use CGK.Reals;
 
-   ------------------
-   -- Line_Segment --
-   ------------------
+   -----------
+   -- Build --
+   -----------
 
-   function Line_Segment
-     (Self : Line_Segment_2D_Builder)
-      return CGK.Primitives.Line_Segments_2D.Line_Segment_2D is
-   begin
-      Assert_Invalid_State_Error (Self.State = Valid);
-
-      return Self.Segment;
-   end Line_Segment;
-
-   ----------
-   -- Make --
-   ----------
-
-   procedure Make
+   procedure Build
      (Self    : in out Line_Segment_2D_Builder;
       Point_1 : CGK.Primitives.Points_2D.Point_2D;
       Point_2 : CGK.Primitives.Points_2D.Point_2D)
@@ -54,6 +41,19 @@ package body CGK.Primitives.Line_Segments_2D.Builders is
       else
          Self.State := Confused_Points_Error;
       end if;
-   end Make;
+   end Build;
+
+   ------------------
+   -- Line_Segment --
+   ------------------
+
+   function Line_Segment
+     (Self : Line_Segment_2D_Builder)
+      return CGK.Primitives.Line_Segments_2D.Line_Segment_2D is
+   begin
+      Assert_Invalid_State_Error (Self.State = Valid);
+
+      return Self.Segment;
+   end Line_Segment;
 
 end CGK.Primitives.Line_Segments_2D.Builders;

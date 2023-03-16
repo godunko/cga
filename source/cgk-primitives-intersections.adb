@@ -29,66 +29,15 @@ package body CGK.Primitives.Intersections is
       Circle_2 : CGK.Primitives.Circles_2D.Circle_2D) return Intersection is
    begin
       return Result : Intersection do
-         Perform (Result, Circle_1, Circle_2);
+         Intersect (Result, Circle_1, Circle_2);
       end return;
    end Create_Intersection;
 
-   ----------------
-   -- Invalidate --
-   ----------------
+   ---------------
+   -- Intersect --
+   ---------------
 
-   procedure Invalidate (Self : in out Intersection) is
-   begin
-      Self.Valid := False;
-   end Invalidate;
-
-   ---------------------------
-   -- Is_Identical_Elements --
-   ---------------------------
-
-   function Is_Identical_Elements (Self : Intersection) return Boolean is
-   begin
-      Assert_Invalid_State_Error (Self.Valid);
-
-      return Self.Identical;
-   end Is_Identical_Elements;
-
-   --------------------------
-   -- Is_Parallel_Elements --
-   --------------------------
-
-   function Is_Parallel_Elements (Self : Intersection) return Boolean is
-   begin
-      Assert_Invalid_State_Error (Self.Valid);
-
-      return Self.Parallel;
-   end Is_Parallel_Elements;
-
-   --------------
-   -- Is_Valid --
-   --------------
-
-   function Is_Valid (Self : Intersection) return Boolean is
-   begin
-      return Self.Valid;
-   end Is_Valid;
-
-   ------------
-   -- Length --
-   ------------
-
-   function Length (Self : Intersection) return Natural is
-   begin
-      Assert_Invalid_State_Error (Self.Valid);
-
-      return Self.Length;
-   end Length;
-
-   -------------
-   -- Perform --
-   -------------
-
-   procedure Perform
+   procedure Intersect
      (Self   : in out Intersection;
       Line_1 : CGK.Primitives.Lines_2D.Line_2D;
       Line_2 : CGK.Primitives.Lines_2D.Line_2D)
@@ -170,13 +119,13 @@ package body CGK.Primitives.Intersections is
       end if;
 
       Self.Valid := True;
-   end Perform;
+   end Intersect;
 
-   -------------
-   -- Perform --
-   -------------
+   ---------------
+   -- Intersect --
+   ---------------
 
-   procedure Perform
+   procedure Intersect
      (Self     : in out Intersection;
       Circle_1 : CGK.Primitives.Circles_2D.Circle_2D;
       Circle_2 : CGK.Primitives.Circles_2D.Circle_2D)
@@ -293,7 +242,58 @@ package body CGK.Primitives.Intersections is
       end if;
 
       Self.Valid := True;
-   end Perform;
+   end Intersect;
+
+   ----------------
+   -- Invalidate --
+   ----------------
+
+   procedure Invalidate (Self : in out Intersection) is
+   begin
+      Self.Valid := False;
+   end Invalidate;
+
+   ---------------------------
+   -- Is_Identical_Elements --
+   ---------------------------
+
+   function Is_Identical_Elements (Self : Intersection) return Boolean is
+   begin
+      Assert_Invalid_State_Error (Self.Valid);
+
+      return Self.Identical;
+   end Is_Identical_Elements;
+
+   --------------------------
+   -- Is_Parallel_Elements --
+   --------------------------
+
+   function Is_Parallel_Elements (Self : Intersection) return Boolean is
+   begin
+      Assert_Invalid_State_Error (Self.Valid);
+
+      return Self.Parallel;
+   end Is_Parallel_Elements;
+
+   --------------
+   -- Is_Valid --
+   --------------
+
+   function Is_Valid (Self : Intersection) return Boolean is
+   begin
+      return Self.Valid;
+   end Is_Valid;
+
+   ------------
+   -- Length --
+   ------------
+
+   function Length (Self : Intersection) return Natural is
+   begin
+      Assert_Invalid_State_Error (Self.Valid);
+
+      return Self.Length;
+   end Length;
 
    -----------
    -- Point --

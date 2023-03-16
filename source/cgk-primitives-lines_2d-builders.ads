@@ -15,13 +15,13 @@ package CGK.Primitives.Lines_2D.Builders is
 
    type Line_2D_Builder is private;
 
-   procedure Make
+   procedure Build
      (Self    : in out Line_2D_Builder;
       Point_1 : CGK.Primitives.Points_2D.Point_2D;
       Point_2 : CGK.Primitives.Points_2D.Point_2D);
    --  Make Line_2D that passing through two Point_2D.
 
-   procedure Make
+   procedure Build
      (Self     : in out Line_2D_Builder;
       Line     : Line_2D;
       Distance : CGK.Reals.Real);

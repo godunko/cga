@@ -18,12 +18,12 @@ package CGK.Primitives.Intersections is
      (Circle_1 : CGK.Primitives.Circles_2D.Circle_2D;
       Circle_2 : CGK.Primitives.Circles_2D.Circle_2D) return Intersection;
 
-   procedure Perform
+   procedure Intersect
      (Self   : in out Intersection;
       Line_1 : CGK.Primitives.Lines_2D.Line_2D;
       Line_2 : CGK.Primitives.Lines_2D.Line_2D);
 
-   procedure Perform
+   procedure Intersect
      (Self     : in out Intersection;
       Circle_1 : CGK.Primitives.Circles_2D.Circle_2D;
       Circle_2 : CGK.Primitives.Circles_2D.Circle_2D);
