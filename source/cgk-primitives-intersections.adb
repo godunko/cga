@@ -193,11 +193,10 @@ package body CGK.Primitives.Intersections is
             D := R1 * R1 - L * L;
 
             if D < 0.0 then
-               D := 0.0;
                L := (if L > 0.0 then R1 else -R1);
             end if;
 
-            H := Elementary_Functions.Sqrt (R1 * R1 + L * L);
+            H := Elementary_Functions.Sqrt (R1 * R1 - L * L);
 
             XS1 := X (Center (Circle_1)) + L * X (A) / Dist - H * Y (A) / Dist;
             YS1 := Y (Center (Circle_1)) + L * Y (A) / Dist + H * X (A) / Dist;
