@@ -9,13 +9,33 @@ project CGK is
    for Source_Dirs use ("../source");
    for Object_Dir use "../.obj";
 
+   Target_Name := project'Target;
+
+   Common_Ada_Switches :=
+     ("-g",
+      "-gnatW8",
+      "-gnat2022",
+      "-gnatym",
+      "-gnatyo",
+      "-gnatwa");
+
+   Target_Ada_Switches := ();
+
+   case Target_Name is
+      when "llvm" =>
+         Target_Ada_Switches :=
+           ("--target=wasm32",
+            "-gnateT=/home/godunko/HDS/hds/source/externals/adawebpack/source/rtl/wasm32.atp",
+            "-gnatw.X");
+      when others =>
+
+   end case;
+
+   Ada_Compiler_Switches :=
+     Common_Ada_Switches & Target_Ada_Switches;
+
    package Compiler is
-      for Switches ("Ada") use 
-        ("-g",
-         "-gnat2022",
-         "-gnatym",
-         "-gnatyo",
-         "-gnatwa");
+      for Switches ("Ada") use Ada_Compiler_Switches;
    end Compiler;
 
 end CGK;
