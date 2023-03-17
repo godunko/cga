@@ -6,7 +6,7 @@
 
 with CGK.Primitives.Circles_2D;
 with CGK.Primitives.Lines_2D;
-with CGK.Primitives.Points_2D;
+with CGK.Primitives.Points_2D.Containers;
 
 package CGK.Primitives.Intersections is
 
@@ -43,13 +43,17 @@ package CGK.Primitives.Intersections is
    --
    --  @exception Invalid_State_Error
 
-   function Length (Self : Intersection) return Natural with Inline;
+   function Length
+     (Self : Intersection)
+      return CGK.Primitives.Points_2D.Containers.Point_2D_Array_Count
+        with Inline;
    --  Returns the number of intersection points.
    --
    --  @exception Invalid_State_Error
 
    function Point
-     (Self : Intersection; Index : Positive)
+     (Self  : Intersection;
+      Index : CGK.Primitives.Points_2D.Containers.Point_2D_Array_Index)
       return CGK.Primitives.Points_2D.Point_2D with Inline;
    --  Returns the intersection point of given Index.
    --
@@ -57,19 +61,22 @@ package CGK.Primitives.Intersections is
    --  @exception Invalid_State_Error
 
    function Points
-     (Self : Intersection) return CGK.Primitives.Points_2D.Point_2D_Array;
+     (Self : Intersection)
+      return CGK.Primitives.Points_2D.Containers.Point_2D_Array;
    --  Returns array of intersection points.
    --
    --  @exception Invalid_State_Error
 
 private
 
+   use CGK.Primitives.Points_2D.Containers;
+
    type Intersection is record
       Valid     : Boolean := False;
       Identical : Boolean := False;
       Parallel  : Boolean := False;
-      Length    : Natural := 0;
-      Points    : CGK.Primitives.Points_2D.Point_2D_Array (1 .. 4);
+      Length    : Point_2D_Array_Count := 0;
+      Points    : Point_2D_Array (1 .. 4);
    end record;
 
 end CGK.Primitives.Intersections;

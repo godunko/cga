@@ -287,7 +287,9 @@ package body CGK.Primitives.Intersections is
    -- Length --
    ------------
 
-   function Length (Self : Intersection) return Natural is
+   function Length
+     (Self : Intersection)
+      return CGK.Primitives.Points_2D.Containers.Point_2D_Array_Count is
    begin
       Assert_Invalid_State_Error (Self.Valid);
 
@@ -299,7 +301,8 @@ package body CGK.Primitives.Intersections is
    -----------
 
    function Point
-     (Self : Intersection; Index : Positive)
+     (Self  : Intersection;
+      Index : CGK.Primitives.Points_2D.Containers.Point_2D_Array_Index)
       return CGK.Primitives.Points_2D.Point_2D is
    begin
       Assert_Invalid_State_Error (Self.Valid);
@@ -316,7 +319,8 @@ package body CGK.Primitives.Intersections is
    ------------
 
    function Points
-     (Self : Intersection) return CGK.Primitives.Points_2D.Point_2D_Array is
+     (Self : Intersection)
+      return CGK.Primitives.Points_2D.Containers.Point_2D_Array is
    begin
       Assert_Invalid_State_Error (Self.Valid);
 

@@ -35,8 +35,6 @@ package CGK.Primitives.Points_2D is
       Point_2 : Point_2D) return CGK.Reals.Real with Inline;
    --  Computes the distance between two points.
 
-   type Point_2D_Array is array (Positive range <>) of Point_2D;
-
 private
 
    type Point_2D is record
