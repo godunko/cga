@@ -10,7 +10,7 @@ with CGK.Primitives.Points_2D.Containers;
 
 package CGK.Primitives.Intersections is
 
-   pragma Pure;
+   pragma Preelaborate;
 
    type Intersection is private;
 
