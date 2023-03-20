@@ -8,7 +8,8 @@ project CGK is
 
    Target_Name := project'Target;
 
-   for Source_Dirs use ("../source", "../source/internals");
+   for Source_Dirs use
+     ("../source", "../source/mathematics", "../source/internals");
    for Object_Dir use "../.obj/" & Target_Name;
 
    Common_Ada_Switches :=

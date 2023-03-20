@@ -6,6 +6,7 @@
 
 package body CGK.Primitives.XYs is
 
+   use CGK.Mathematics.Vectors_2;
    use CGK.Reals;
 
    ---------
@@ -14,7 +15,7 @@ package body CGK.Primitives.XYs is
 
    function "*" (Left : CGK.Reals.Real; Right : XY) return XY is
    begin
-      return (Left * Right.X, Left * Right.Y);
+      return (Value => Left * Right.Value);
    end "*";
 
    ---------
@@ -23,7 +24,7 @@ package body CGK.Primitives.XYs is
 
    function "+" (Left : XY; Right : XY) return XY is
    begin
-      return (Left.X + Right.X, Left.Y + Right.Y);
+      return (Value => Left.Value + Right.Value);
    end "+";
 
    ---------
@@ -32,7 +33,7 @@ package body CGK.Primitives.XYs is
 
    function "-" (Self : XY) return XY is
    begin
-      return (-Self.X, -Self.Y);
+      return (Value => -Self.Value);
    end "-";
 
    ---------
@@ -41,7 +42,7 @@ package body CGK.Primitives.XYs is
 
    function "-" (Left : XY; Right : XY) return XY is
    begin
-      return (Left.X - Right.X, Left.Y - Right.Y);
+      return (Value => Left.Value - Right.Value);
    end "-";
 
    ---------------
@@ -50,7 +51,7 @@ package body CGK.Primitives.XYs is
 
    function Create_XY (X : CGK.Reals.Real; Y : CGK.Reals.Real) return XY is
    begin
-      return (X => X, Y => Y);
+      return (Value => [X, Y]);
    end Create_XY;
 
    -------
@@ -59,7 +60,7 @@ package body CGK.Primitives.XYs is
 
    function X (Self : XY) return CGK.Reals.Real is
    begin
-      return Self.X;
+      return Self.Value (0);
    end X;
 
    -------
@@ -68,7 +69,7 @@ package body CGK.Primitives.XYs is
 
    function Y (Self : XY) return CGK.Reals.Real is
    begin
-      return Self.Y;
+      return Self.Value (1);
    end Y;
 
 end CGK.Primitives.XYs;

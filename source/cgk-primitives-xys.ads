@@ -7,6 +7,7 @@
 --  Cartesian coordinate entity in 2D space {X, Y}
 
 with CGK.Reals;
+private with CGK.Mathematics.Vectors_2;
 
 package CGK.Primitives.XYs is
 
@@ -37,8 +38,7 @@ package CGK.Primitives.XYs is
 private
 
    type XY is record
-      X : CGK.Reals.Real := 0.0;
-      Y : CGK.Reals.Real := 0.0;
+      Value : CGK.Mathematics.Vectors_2.Vector_2;
    end record;
 
 end CGK.Primitives.XYs;
