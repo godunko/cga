@@ -12,39 +12,39 @@ package CGK.Primitives.Intersections is
 
    pragma Preelaborate;
 
-   type Intersection is private;
+   type Intersector_2D is private;
 
    function Create_Intersection
      (Circle_1 : CGK.Primitives.Circles_2D.Circle_2D;
-      Circle_2 : CGK.Primitives.Circles_2D.Circle_2D) return Intersection;
+      Circle_2 : CGK.Primitives.Circles_2D.Circle_2D) return Intersector_2D;
 
    procedure Intersect
-     (Self   : in out Intersection;
+     (Self   : in out Intersector_2D;
       Line_1 : CGK.Primitives.Lines_2D.Line_2D;
       Line_2 : CGK.Primitives.Lines_2D.Line_2D);
 
    procedure Intersect
-     (Self     : in out Intersection;
+     (Self     : in out Intersector_2D;
       Circle_1 : CGK.Primitives.Circles_2D.Circle_2D;
       Circle_2 : CGK.Primitives.Circles_2D.Circle_2D);
 
-   function Is_Valid (Self : Intersection) return Boolean with Inline;
+   function Is_Valid (Self : Intersector_2D) return Boolean with Inline;
    --  Returns True when object contains valid data.
 
    function Is_Identical_Elements
-     (Self : Intersection) return Boolean with Inline;
+     (Self : Intersector_2D) return Boolean with Inline;
    --  Returns True when elements are identical.
    --
    --  @exception Invalid_State_Error
 
    function Is_Parallel_Elements
-     (Self : Intersection) return Boolean with Inline;
+     (Self : Intersector_2D) return Boolean with Inline;
    --  Returns True when elements are parallel.
    --
    --  @exception Invalid_State_Error
 
    function Length
-     (Self : Intersection)
+     (Self : Intersector_2D)
       return CGK.Primitives.Points_2D.Containers.Point_2D_Array_Count
         with Inline;
    --  Returns the number of intersection points.
@@ -52,7 +52,7 @@ package CGK.Primitives.Intersections is
    --  @exception Invalid_State_Error
 
    function Point
-     (Self  : Intersection;
+     (Self  : Intersector_2D;
       Index : CGK.Primitives.Points_2D.Containers.Point_2D_Array_Index)
       return CGK.Primitives.Points_2D.Point_2D with Inline;
    --  Returns the intersection point of given Index.
@@ -61,7 +61,7 @@ package CGK.Primitives.Intersections is
    --  @exception Invalid_State_Error
 
    function Points
-     (Self : Intersection)
+     (Self : Intersector_2D)
       return CGK.Primitives.Points_2D.Containers.Point_2D_Array;
    --  Returns array of intersection points.
    --
@@ -71,7 +71,7 @@ private
 
    use CGK.Primitives.Points_2D.Containers;
 
-   type Intersection is record
+   type Intersector_2D is record
       Valid     : Boolean := False;
       Identical : Boolean := False;
       Parallel  : Boolean := False;
