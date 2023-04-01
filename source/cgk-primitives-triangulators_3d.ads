@@ -33,6 +33,9 @@ package CGK.Primitives.Triangulators_3D is
    procedure Triangulate (Self : in out Triangulator_3D);
    --  Do triangulation.
 
+   function Is_Valid (Self : Triangulator_3D) return Boolean;
+   --  Returns True when object contains valid result of the triangulation.
+
    function Length (Self : Triangulator_3D) return Triangle_Count;
 
    procedure Triangle

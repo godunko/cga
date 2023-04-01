@@ -100,6 +100,15 @@ package body CGK.Primitives.Triangulators_3D is
       Self.Valid := False;
    end Invalidate;
 
+   --------------
+   -- Is_Valid --
+   --------------
+
+   function Is_Valid (Self : Triangulator_3D) return Boolean is
+   begin
+      return Self.Valid;
+   end Is_Valid;
+
    ------------
    -- Length --
    ------------
