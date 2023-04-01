@@ -35,7 +35,10 @@ package CGK.Primitives.XYZs is
    --  Returns Z coordinate.
 
    function "+" (Left : XYZ; Right : XYZ) return XYZ with Inline;
-   --  Sum components
+   --  Sum components.
+
+   function "-" (Left : XYZ; Right : XYZ) return XYZ with Inline;
+   --  Subtract components.
 
 private
 

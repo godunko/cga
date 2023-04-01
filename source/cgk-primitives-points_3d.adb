@@ -4,10 +4,35 @@
 --  SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 --
 
+with CGK.Primitives.Vectors_3D;
+
 package body CGK.Primitives.Points_3D is
 
+   use CGK.Primitives.Vectors_3D;
    use CGK.Primitives.XYZs;
    use CGK.Reals;
+
+   ---------
+   -- "+" --
+   ---------
+
+   function "+"
+     (Left  : Point_3D;
+      Right : CGK.Primitives.Vectors_3D.Vector_3D) return Point_3D is
+   begin
+      return Point_3D (XYZ (Left) + XYZ (Right));
+   end "+";
+
+   ---------
+   -- "-" --
+   ---------
+
+   function "-"
+     (Left  : Point_3D;
+      Right : CGK.Primitives.Vectors_3D.Vector_3D) return Point_3D is
+   begin
+      return Point_3D (XYZ (Left) - XYZ (Right));
+   end "-";
 
    ---------------------
    -- Create_Point_3D --

@@ -6,6 +6,7 @@
 
 --  Direction - unit vector in the 3D space.
 
+limited with CGK.Primitives.Vectors_3D;
 with CGK.Primitives.XYZs;
 with CGK.Reals;
 
@@ -27,6 +28,11 @@ package CGK.Primitives.Directions_3D is
    function XYZ
      (Self : Direction_3D) return CGK.Primitives.XYZs.XYZ with Inline;
    --  Returns XYZ triplet coordinate.
+
+   function As_Vector_3D
+     (Self : Direction_3D)
+      return CGK.Primitives.Vectors_3D.Vector_3D with Inline;
+   --  Convert Direction_3D to Vector_3D.
 
 private
 

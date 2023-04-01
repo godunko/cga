@@ -4,10 +4,23 @@
 --  SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 --
 
+with CGK.Primitives.Vectors_3D;
+
 package body CGK.Primitives.Directions_3D is
 
+   use CGK.Primitives.Vectors_3D;
    use CGK.Primitives.XYZs;
    use CGK.Reals;
+
+   ------------------
+   -- As_Vector_3D --
+   ------------------
+
+   function As_Vector_3D
+     (Self : Direction_3D) return CGK.Primitives.Vectors_3D.Vector_3D is
+   begin
+      return Create_Vector_3D (XYZ (Self));
+   end As_Vector_3D;
 
    -------------------
    -- Unchecked_Set --

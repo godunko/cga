@@ -6,6 +6,7 @@
 
 --  Point in 3D cartesian space.
 
+limited with CGK.Primitives.Vectors_3D;
 with CGK.Primitives.XYZs;
 with CGK.Reals;
 
@@ -34,6 +35,16 @@ package CGK.Primitives.Points_3D is
 
    function XYZ (Self : Point_3D) return CGK.Primitives.XYZs.XYZ with Inline;
    --  Returns three coordinates of the point as tuple of numbers.
+
+   function "+"
+     (Left  : Point_3D;
+      Right : CGK.Primitives.Vectors_3D.Vector_3D)
+      return Point_3D with Inline;
+
+   function "-"
+     (Left  : Point_3D;
+      Right : CGK.Primitives.Vectors_3D.Vector_3D)
+      return Point_3D with Inline;
 
 private
 

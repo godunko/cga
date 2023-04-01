@@ -17,6 +17,15 @@ package body CGK.Primitives.XYZs is
       return (Left.X + Right.X, Left.Y + Right.Y, Left.Z + Right.Z);
    end "+";
 
+   ---------
+   -- "-" --
+   ---------
+
+   function "-" (Left : XYZ; Right : XYZ) return XYZ is
+   begin
+      return (Left.X - Right.X, Left.Y - Right.Y, Left.Z - Right.Z);
+   end "-";
+
    ----------------
    -- Create_XYZ --
    ----------------
