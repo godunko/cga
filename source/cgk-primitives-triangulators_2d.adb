@@ -4,7 +4,6 @@
 --  SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 --
 
-with CGK.Internals.Generic_Sequences;
 with CGK.Primitives.XYs;
 with CGK.Reals;
 
@@ -45,11 +44,13 @@ package body CGK.Primitives.Triangulators_2D is
    -- Add_Polygon_Point --
    -----------------------
 
-   procedure Add_Polygon_Point
+   function Add_Polygon_Point
      (Self  : in out Triangulator_2D;
-      Point : CGK.Primitives.Points_2D.Point_2D) is
+      Point : CGK.Primitives.Points_2D.Point_2D) return Vertex_Index is
    begin
       Self.Points.Append (Point);
+
+      return Vertex_Index (Self.Points.Last);
    end Add_Polygon_Point;
 
    -------------
@@ -175,28 +176,30 @@ package body CGK.Primitives.Triangulators_2D is
    -- Length --
    ------------
 
-   function Length
-     (Self : Triangulator_2D)
-      return CGK.Primitives.Points_2D.Containers.Point_2D_Array_Count is
+   function Length (Self : Triangulator_2D) return Triangle_Count is
    begin
       Assert_Invalid_State_Error (Self.Valid);
 
       return Self.Result.Length;
    end Length;
 
-   -----------
-   -- Point --
-   -----------
+   --------------
+   -- Triangle --
+   --------------
 
-   function Point
-     (Self : Triangulator_2D;
-      Index : CGK.Primitives.Points_2D.Containers.Point_2D_Array_Index)
-      return CGK.Primitives.Points_2D.Point_2D is
+   procedure Triangle
+     (Self  : Triangulator_2D;
+      Index : Triangle_Index;
+      A     : out Vertex_Index;
+      B     : out Vertex_Index;
+      C     : out Vertex_Index) is
    begin
       Assert_Invalid_State_Error (Self.Valid);
 
-      return Self.Result (Index);
-   end Point;
+      A := Self.Result (Index).A;
+      B := Self.Result (Index).B;
+      C := Self.Result (Index).C;
+   end Triangle;
 
    -----------------
    -- Triangulate --
@@ -266,9 +269,10 @@ package body CGK.Primitives.Triangulators_2D is
          end if;
 
          if Can_Cut (Self.Points, Verticies, Previous, Current, Next) then
-            Self.Result.Append (Self.Points (Verticies (Previous)));
-            Self.Result.Append (Self.Points (Verticies (Current)));
-            Self.Result.Append (Self.Points (Verticies (Next)));
+            Self.Result.Append
+              ((Vertex_Count (Verticies (Previous)),
+                Vertex_Count (Verticies (Current)),
+                Vertex_Count (Verticies (Next))));
 
             Verticies.Delete (Current);
 
