@@ -183,6 +183,20 @@ package body CGK.Internals.Generic_Sequences is
       end if;
    end Reallocate;
 
+   -------------
+   -- Replace --
+   -------------
+
+   procedure Replace
+     (Self : in out Sequence'Class; Index : Index_Type; Item : Element_Type) is
+   begin
+      if Index not in 1 .. Self.Length then
+         raise Constraint_Error;
+      end if;
+
+      Self.Data (Index) := Item;
+   end Replace;
+
    ------------------
    -- Set_Capacity --
    ------------------

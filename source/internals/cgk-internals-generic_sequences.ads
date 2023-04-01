@@ -45,6 +45,9 @@ package CGK.Internals.Generic_Sequences is
 
    procedure Delete_Last (Self : in out Sequence'Class);
 
+   procedure Replace
+     (Self : in out Sequence'Class; Index : Index_Type; Item : Element_Type);
+
 private
 
    type Element_Array_Type is array (Index_Type range <>) of Element_Type;
