@@ -2,6 +2,9 @@
 all:
 	gprbuild -P gnat/cgk.gpr
 
+clean:
+	rm -rf .obj
+
 build_native:
 	gprbuild -P gnat/cgk.gpr
 
