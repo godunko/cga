@@ -12,27 +12,30 @@ project CGK is
      ("../source", "../source/mathematics", "../source/internals");
    for Object_Dir use "../.obj/" & Target_Name;
 
-   Common_Ada_Switches :=
+   Common_Ada_Compiler_Switches :=
      ("-g",
       "-gnatW8",
       "-gnat2022",
+      "-gnatn2",
+      "-O2",
       "-gnatym",
       "-gnatyo",
       "-gnatwa");
 
-   Target_Ada_Switches := ();
+   Target_Ada_Compiler_Switches := ();
 
    case Target_Name is
       when "llvm" =>
-         Target_Ada_Switches :=
+         Target_Ada_Compiler_Switches :=
            ("--target=wasm32",
-            "-gnatw.X");
-      when others =>
+            "-gnatw.X");  --  turn off warnings for non-local exception
 
+      when others =>
+         null;
    end case;
 
    Ada_Compiler_Switches :=
-     Common_Ada_Switches & Target_Ada_Switches;
+     Common_Ada_Compiler_Switches & Target_Ada_Compiler_Switches;
 
    package Compiler is
       for Switches ("Ada") use Ada_Compiler_Switches;
