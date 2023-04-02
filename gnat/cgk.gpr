@@ -26,7 +26,6 @@ project CGK is
       when "llvm" =>
          Target_Ada_Switches :=
            ("--target=wasm32",
-            "-gnateT=/home/godunko/HDS/hds/source/externals/adawebpack/source/rtl/wasm32.atp",
             "-gnatw.X");
       when others =>
 
