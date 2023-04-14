@@ -4,13 +4,9 @@
 --  SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 --
 
-project CGK is
+abstract project CGK_Common is
 
    Target_Name := project'Target;
-
-   for Source_Dirs use
-     ("../source", "../source/mathematics", "../source/internals");
-   for Object_Dir use "../.obj/" & Target_Name;
 
    Common_Ada_Compiler_Switches :=
      ("-g",
@@ -37,8 +33,4 @@ project CGK is
    Ada_Compiler_Switches :=
      Common_Ada_Compiler_Switches & Target_Ada_Compiler_Switches;
 
-   package Compiler is
-      for Switches ("Ada") use Ada_Compiler_Switches;
-   end Compiler;
-
-end CGK;
+end CGK_Common;
