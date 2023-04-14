@@ -5,17 +5,16 @@
 --
 
 with "cgk_common.gpr";
-with "cgk_geometry.gpr";
 with "cgk_primitives.gpr";
 
-project CGK_Topology is
+project CGK_Geometry is
 
    for Source_Dirs use
-     ("../source/topology", "../source/topology/internals");
+     ("../source/geometry", "../source/geometry/internals");
    for Object_Dir use "../.obj/" & CGK_Common.Target_Name;
 
    package Compiler is
       for Switches ("Ada") use CGK_Common.Ada_Compiler_Switches;
    end Compiler;
 
-end CGK_Topology;
+end CGK_Geometry;
