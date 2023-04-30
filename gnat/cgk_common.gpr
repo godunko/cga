@@ -14,9 +14,11 @@ abstract project CGK_Common is
       "-gnat2022",
       "-gnatn2",
       "-O2",
-      "-gnatym",
-      "-gnatyo",
-      "-gnatwa");
+      "-gnatym",   --  check line length <= 79 characters
+      "-gnatyo",   --  check subprogram bodies in alphabetical order
+      "-gnatys",   --  check separate subprogram specs present
+      "-gnatwa",   --  turn on all info/warnings marked below with +
+      "-gnatwt");  --  turn on warnings for tracking deleted code
 
    Target_Ada_Compiler_Switches := ();
 
