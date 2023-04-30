@@ -9,7 +9,10 @@ with "cgk_common.gpr";
 project CGK_Primitives is
 
    for Source_Dirs use
-     ("../source", "../source/mathematics", "../source/internals");
+     ("../source",
+      "../source/internals",
+      "../source/mathematics",
+      "../source/mathematics/internals");
    for Object_Dir use "../.obj/" & CGK_Common.Target_Name;
 
    package Compiler is
