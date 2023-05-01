@@ -17,7 +17,13 @@ package CGK.Internals.Generic_Sequences is
 
    subtype Count_Type is Index_Type'Base range 0 .. Index_Type'Last;
 
-   type Sequence is tagged private with Constant_Indexing => Element;
+   type Sequence is tagged private
+     with Constant_Indexing => Element,
+          Aggregate => (Empty       => Empty_Sequence,
+                        Add_Unnamed => Append),
+          Preelaborable_Initialization;
+
+   function Is_Empty (Self : Sequence'Class) return Boolean with Inline;
 
    function First (Self : Sequence'Class) return Index_Type with Inline;
 
@@ -39,7 +45,7 @@ package CGK.Internals.Generic_Sequences is
 
    procedure Clear (Self : in out Sequence'Class);
 
-   procedure Append (Self : in out Sequence'Class; Item : Element_Type);
+   procedure Append (Self : in out Sequence; Item : Element_Type);
 
    procedure Delete (Self : in out Sequence'Class; Index : Index_Type);
 
@@ -47,6 +53,8 @@ package CGK.Internals.Generic_Sequences is
 
    procedure Replace
      (Self : in out Sequence'Class; Index : Index_Type; Item : Element_Type);
+
+   Empty_Sequence : constant Sequence;
 
 private
 
@@ -63,5 +71,8 @@ private
    overriding procedure Adjust (Self : in out Sequence);
 
    overriding procedure Finalize (Self : in out Sequence);
+
+   Empty_Sequence : constant Sequence :=
+     (Ada.Finalization.Controlled with others => <>);
 
 end CGK.Internals.Generic_Sequences;

@@ -32,7 +32,7 @@ package body CGK.Internals.Generic_Sequences is
    -- Append --
    ------------
 
-   procedure Append (Self : in out Sequence'Class; Item : Element_Type) is
+   procedure Append (Self : in out Sequence; Item : Element_Type) is
    begin
       Self.Length := @ + 1;
       Reallocate (Self.Data, Self.Capacity, Self.Length);
@@ -124,6 +124,15 @@ package body CGK.Internals.Generic_Sequences is
 
       return Self.Data (Self.Data'First);
    end First_Element;
+
+   --------------
+   -- Is_Empty --
+   --------------
+
+   function Is_Empty (Self : Sequence'Class) return Boolean is
+   begin
+      return Self.Length = 0;
+   end Is_Empty;
 
    ----------
    -- Last --
