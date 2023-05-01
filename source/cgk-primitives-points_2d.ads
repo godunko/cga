@@ -16,7 +16,8 @@ package CGK.Primitives.Points_2D is
    type Point_2D is private;
 
    function Create_Point_2D
-     (X : CGK.Reals.Real; Y : CGK.Reals.Real) return Point_2D with Inline;
+     (X : CGK.Reals.Real; Y : CGK.Reals.Real) return Point_2D
+     with Inline_Always;
 
    function Create_Point_2D
      (XY : CGK.Primitives.XYs.XY) return Point_2D with Inline;

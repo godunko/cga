@@ -16,7 +16,7 @@ package CGK.Primitives.XYs is
    type XY is private;
 
    function Create_XY
-     (X : CGK.Reals.Real; Y : CGK.Reals.Real) return XY with Inline;
+     (X : CGK.Reals.Real; Y : CGK.Reals.Real) return XY with Inline_Always;
 
    function X (Self : XY) return CGK.Reals.Real with Inline;
    --  Returns X coordinate.
