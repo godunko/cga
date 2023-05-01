@@ -27,6 +27,16 @@ package body CGK.Mathematics.Vectors_2 is
    end "*";
 
    ---------
+   -- "*" --
+   ---------
+
+   function "*"
+     (Left : Vector_2; Right : Vector_2) return Vector_2 is
+   begin
+      return [Left (0) * Right (0), Left (1) * Right (1)];
+   end "*";
+
+   ---------
    -- "+" --
    ---------
 
