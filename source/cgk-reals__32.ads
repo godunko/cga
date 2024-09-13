@@ -20,4 +20,6 @@ package CGK.Reals is
    --  nearest value of real type. Nearest value is choosen in direction of
    --  infinity the same sign as given value.
 
+   Real_Vector_2_Alignment : constant := 8;
+
 end CGK.Reals;

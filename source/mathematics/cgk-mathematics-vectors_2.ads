@@ -11,7 +11,7 @@ package CGK.Mathematics.Vectors_2 is
    pragma Pure;
 
    type Vector_2 is array (0 .. 1) of CGK.Reals.Real
-     with Alignment => 16;
+     with Alignment => CGK.Reals.Real_Vector_2_Alignment;
    pragma Machine_Attribute (Vector_2, "vector_type");
    pragma Machine_Attribute (Vector_2, "may_alias");
 
