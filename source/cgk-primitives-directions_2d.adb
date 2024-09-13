@@ -1,5 +1,5 @@
 --
---  Copyright (C) 2023, Vadim Godunko <vgodunko@gmail.com>
+--  Copyright (C) 2023-2024, Vadim Godunko <vgodunko@gmail.com>
 --
 --  SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 --
@@ -36,6 +36,18 @@ package body CGK.Primitives.Directions_2D is
    begin
       return Create_Direction_2D (X (XY), Y (XY));
    end Create_Direction_2D;
+
+   -------------------
+   -- Unchecked_Set --
+   -------------------
+
+   procedure Unchecked_Set
+     (Self : out Direction_2D;
+      X    : CGK.Reals.Real;
+      Y    : CGK.Reals.Real) is
+   begin
+      Self.Coordinates := CGK.Primitives.XYs.Create_XY (X => X, Y => Y);
+   end Unchecked_Set;
 
    -------
    -- X --

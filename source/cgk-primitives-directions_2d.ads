@@ -1,5 +1,5 @@
 --
---  Copyright (C) 2023, Vadim Godunko <vgodunko@gmail.com>
+--  Copyright (C) 2023-2024, Vadim Godunko <vgodunko@gmail.com>
 --
 --  SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 --
@@ -36,5 +36,10 @@ private
       Coordinates : CGK.Primitives.XYs.XY :=
         CGK.Primitives.XYs.Create_XY (1.0, 0.0);
    end record;
+
+   procedure Unchecked_Set
+     (Self : out Direction_2D;
+      X    : CGK.Reals.Real;
+      Y    : CGK.Reals.Real);
 
 end CGK.Primitives.Directions_2D;
