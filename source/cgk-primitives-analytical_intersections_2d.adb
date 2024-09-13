@@ -7,7 +7,7 @@
 with CGK.Primitives.Vectors_2D;
 with CGK.Reals.Elementary_Functions;
 
-package body CGK.Primitives.Intersections_2D is
+package body CGK.Primitives.Analytical_Intersections_2D is
 
    use CGK.Primitives.Circles_2D;
    use CGK.Primitives.Lines_2D;
@@ -339,4 +339,4 @@ package body CGK.Primitives.Intersections_2D is
       B := C;
    end Swap;
 
-end CGK.Primitives.Intersections_2D;
+end CGK.Primitives.Analytical_Intersections_2D;

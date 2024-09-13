@@ -8,7 +8,7 @@ with CGK.Primitives.Circles_2D;
 with CGK.Primitives.Lines_2D;
 with CGK.Primitives.Points_2D.Containers;
 
-package CGK.Primitives.Intersections_2D is
+package CGK.Primitives.Analytical_Intersections_2D is
 
    pragma Preelaborate;
 
@@ -79,4 +79,4 @@ private
       Points    : Point_2D_Array (1 .. 4);
    end record;
 
-end CGK.Primitives.Intersections_2D;
+end CGK.Primitives.Analytical_Intersections_2D;
