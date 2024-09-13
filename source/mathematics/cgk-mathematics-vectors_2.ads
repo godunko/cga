@@ -1,5 +1,5 @@
 --
---  Copyright (C) 2023, Vadim Godunko <vgodunko@gmail.com>
+--  Copyright (C) 2023-2024, Vadim Godunko <vgodunko@gmail.com>
 --
 --  SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 --
@@ -31,5 +31,8 @@ package CGK.Mathematics.Vectors_2 is
 
    function "*"
      (Left : Vector_2; Right : Vector_2) return Vector_2 with Inline;
+
+   function "/"
+     (Left : Vector_2; Right : CGK.Reals.Real) return Vector_2 with Inline;
 
 end CGK.Mathematics.Vectors_2;

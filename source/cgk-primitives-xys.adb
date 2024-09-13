@@ -1,13 +1,16 @@
 --
---  Copyright (C) 2023, Vadim Godunko <vgodunko@gmail.com>
+--  Copyright (C) 2023-2024, Vadim Godunko <vgodunko@gmail.com>
 --
 --  SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 --
+
+with CGK.Reals.Elementary_Functions;
 
 package body CGK.Primitives.XYs is
 
    use CGK.Mathematics.Vectors_2;
    use CGK.Reals;
+   use CGK.Reals.Elementary_Functions;
 
    ---------
    -- "*" --
@@ -45,6 +48,15 @@ package body CGK.Primitives.XYs is
       return (Value => Left.Value - Right.Value);
    end "-";
 
+   ---------
+   -- "/" --
+   ---------
+
+   function "/" (Left : XY; Right : CGK.Reals.Real) return XY is
+   begin
+      return (Value => Left.Value / Right);
+   end "/";
+
    ---------------
    -- Create_XY --
    ---------------
@@ -53,6 +65,17 @@ package body CGK.Primitives.XYs is
    begin
       return (Value => [X, Y]);
    end Create_XY;
+
+   -------------
+   -- Modulus --
+   -------------
+
+   function Modulus (Self : XY) return CGK.Reals.Real is
+   begin
+      return
+        Sqrt
+          (Self.Value (0) * Self.Value (0) + Self.Value (1) * Self.Value (1));
+   end Modulus;
 
    -------
    -- X --

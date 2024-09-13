@@ -43,10 +43,9 @@ package body CGK.Primitives.Directions_2D is
 
    procedure Unchecked_Set
      (Self : out Direction_2D;
-      X    : CGK.Reals.Real;
-      Y    : CGK.Reals.Real) is
+      XY   : CGK.Primitives.XYs.XY) is
    begin
-      Self.Coordinates := CGK.Primitives.XYs.Create_XY (X => X, Y => Y);
+      Self.Coordinates := XY;
    end Unchecked_Set;
 
    -------

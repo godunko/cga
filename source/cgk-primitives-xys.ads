@@ -1,5 +1,5 @@
 --
---  Copyright (C) 2023, Vadim Godunko <vgodunko@gmail.com>
+--  Copyright (C) 2023-2024, Vadim Godunko <vgodunko@gmail.com>
 --
 --  SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 --
@@ -34,6 +34,12 @@ package CGK.Primitives.XYs is
 
    function "*" (Left : CGK.Reals.Real; Right : XY) return XY with Inline;
    --  Multiply components by scalar.
+
+   function "/" (Left : XY; Right : CGK.Reals.Real) return XY with Inline;
+   --  Divide components by scalar.
+
+   function Modulus (Self : XY) return CGK.Reals.Real with Inline;
+   --  Returns Sqrt (X * X + Y * Y)
 
 private
 

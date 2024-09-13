@@ -4,14 +4,11 @@
 --  SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 --
 
-with CGK.Reals.Elementary_Functions;
-
 package body CGK.Primitives.Directions_2D.Builders is
 
    use CGK.Primitives.Points_2D;
    use CGK.Primitives.XYs;
    use CGK.Reals;
-   use CGK.Reals.Elementary_Functions;
 
    procedure Invalidate (Self : in out Direction_2D_Builder);
    --  Invalidate state.
@@ -23,9 +20,7 @@ package body CGK.Primitives.Directions_2D.Builders is
    procedure Build
      (Self : in out Direction_2D_Builder; XY : CGK.Primitives.XYs.XY)
    is
-      VX : constant Real := X (XY);
-      VY : constant Real := Y (XY);
-      D  : constant Real := Sqrt (VX * VX + VY * VY);
+      D : constant Real := Modulus (XY);
 
    begin
       Invalidate (Self);
@@ -34,7 +29,7 @@ package body CGK.Primitives.Directions_2D.Builders is
          return;
       end if;
 
-      Unchecked_Set (Self.Result, VX / D, VY / D);
+      Unchecked_Set (Self.Result, XY / D);
       Self.Valid := True;
    end Build;
 
@@ -47,10 +42,8 @@ package body CGK.Primitives.Directions_2D.Builders is
       From : CGK.Primitives.Points_2D.Point_2D;
       To   : CGK.Primitives.Points_2D.Point_2D)
    is
-      V  : constant XYs.XY := XY (To) - XY (From);
-      VX : constant Real   := X (V);
-      VY : constant Real   := Y (V);
-      D  : constant Real   := Sqrt (VX * VX + VY * VY);
+      V : constant XYs.XY := XY (To) - XY (From);
+      D : constant Real   := Modulus (V);
 
    begin
       Invalidate (Self);
@@ -59,7 +52,7 @@ package body CGK.Primitives.Directions_2D.Builders is
          return;
       end if;
 
-      Unchecked_Set (Self.Result, VX / D, VY / D);
+      Unchecked_Set (Self.Result, V / D);
       Self.Valid := True;
    end Build;
 

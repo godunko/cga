@@ -39,7 +39,6 @@ private
 
    procedure Unchecked_Set
      (Self : out Direction_2D;
-      X    : CGK.Reals.Real;
-      Y    : CGK.Reals.Real);
+      XY   : CGK.Primitives.XYs.XY);
 
 end CGK.Primitives.Directions_2D;
