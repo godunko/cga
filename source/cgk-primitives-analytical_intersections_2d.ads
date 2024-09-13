@@ -31,6 +31,11 @@ package CGK.Primitives.Analytical_Intersections_2D is
       Circle_1 : CGK.Primitives.Circles_2D.Circle_2D;
       Circle_2 : CGK.Primitives.Circles_2D.Circle_2D);
 
+   procedure Intersect
+     (Self   : in out Analytical_Intersection_2D;
+      Line   : CGK.Primitives.Lines_2D.Line_2D;
+      Circle : CGK.Primitives.Circles_2D.Circle_2D);
+
    function Is_Valid
      (Self : Analytical_Intersection_2D) return Boolean with Inline;
    --  Returns True when object contains valid data.

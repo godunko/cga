@@ -1,5 +1,5 @@
 --
---  Copyright (C) 2023, Vadim Godunko <vgodunko@gmail.com>
+--  Copyright (C) 2023-2024, Vadim Godunko <vgodunko@gmail.com>
 --
 --  SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 --
@@ -239,6 +239,67 @@ package body CGK.Primitives.Analytical_Intersections_2D is
          Self.Parallel  := False;
          Self.Identical := False;
          Self.Length    := 0;
+      end if;
+
+      Self.Valid := True;
+   end Intersect;
+
+   ---------------
+   -- Intersect --
+   ---------------
+
+   procedure Intersect
+     (Self   : in out Analytical_Intersection_2D;
+      Line   : CGK.Primitives.Lines_2D.Line_2D;
+      Circle : CGK.Primitives.Circles_2D.Circle_2D)
+   is
+      A, B, C : Real;
+      D, H    : Real;
+      XS, YS  : Real;
+
+   begin
+      Invalidate (Self);
+
+      Coefficients (Line, A, B, C);
+      D := A * X (Center (Circle)) + B * Y (Center (Circle)) + C;
+
+      if abs D - Radius (Circle) > Epsilon (Radius (Circle)) then
+         --  No intersection
+
+         Self.Identical := False;
+         Self.Parallel  := False;
+         Self.Length    := 0;
+
+      elsif abs (abs D - Radius (Circle)) <= Epsilon (Radius (Circle)) then
+         --  Tangential, single intersection point
+
+         Self.Identical := False;
+         Self.Parallel  := False;
+         Self.Length    := 1;
+
+         XS := X (Center (Circle)) - D * A;
+         YS := Y (Center (Circle)) - D * B;
+
+         Self.Points (1) := Create_Point_2D (XS, YS);
+
+      else
+         --  Two intersection points
+
+         Self.Identical := False;
+         Self.Parallel  := False;
+         Self.Length    := 2;
+
+         H :=
+           Elementary_Functions.Sqrt
+             (Radius (Circle) * Radius (Circle) - D * D);
+
+         XS := X (Center (Circle)) - D * A - H * B;
+         YS := Y (Center (Circle)) - D * B + H * A;
+         Self.Points (1) := Create_Point_2D (XS, YS);
+
+         XS := X (Center (Circle)) - D * A + H * B;
+         YS := Y (Center (Circle)) - D * B - H * A;
+         Self.Points (2) := Create_Point_2D (XS, YS);
       end if;
 
       Self.Valid := True;
