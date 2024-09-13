@@ -1,5 +1,5 @@
 # cga
-Computational Geometry on Ada
+Computational Geometry Kernel
 
 Project structure
 -----------------
