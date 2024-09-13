@@ -30,6 +30,16 @@ package CGK.Primitives.Directions_2D is
    function XY (Self : Direction_2D) return CGK.Primitives.XYs.XY with Inline;
    --  Returns XY pair coordinate.
 
+   function Is_Equal
+     (Self              : Direction_2D;
+      Other             : Direction_2D;
+      Angular_Tolarance : CGK.Reals.Real) return Boolean;
+   --  Returns True if two direction objects are equial with given angular
+   --  tolerance.
+   --
+   --  @param Angular_Tolarance
+   --    Maximum angle between equal direction objects.
+
 private
 
    type Direction_2D is record

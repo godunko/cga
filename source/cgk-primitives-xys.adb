@@ -66,6 +66,30 @@ package body CGK.Primitives.XYs is
       return (Value => [X, Y]);
    end Create_XY;
 
+   -------------------
+   -- Cross_Product --
+   -------------------
+
+   function Cross_Product
+     (Self : XY; Other : XY) return CGK.Reals.Real is
+   begin
+      return
+        Self.Value (0) * Other.Value (1)
+          - Self.Value (1) * Other.Value (0);
+   end Cross_Product;
+
+   -----------------
+   -- Dot_Product --
+   -----------------
+
+   function Dot_Product
+     (Self : XY; Other : XY) return CGK.Reals.Real is
+   begin
+      return
+        Self.Value (0) * Other.Value (0)
+          + Self.Value (1) * Other.Value (1);
+   end Dot_Product;
+
    -------------
    -- Modulus --
    -------------

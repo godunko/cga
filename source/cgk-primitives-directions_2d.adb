@@ -10,6 +10,27 @@ package body CGK.Primitives.Directions_2D is
 
    use CGK.Primitives.XYs;
    use CGK.Reals;
+   use CGK.Reals.Elementary_Functions;
+
+   function Angle
+     (Self : Direction_2D; Other : Direction_2D) return CGK.Reals.Real;
+   --  Returns angle between two direction vectors.
+
+   -----------
+   -- Angle --
+   -----------
+
+   function Angle
+     (Self : Direction_2D; Other : Direction_2D) return CGK.Reals.Real
+   is
+      Cosine : constant Reals.Real :=
+        Dot_Product (Self.Coordinates, Other.Coordinates);
+      Sine   : constant Reals.Real :=
+        Cross_Product (Self.Coordinates, Other.Coordinates);
+
+   begin
+      return Arctan (X => Cosine, Y => Sine);
+   end Angle;
 
    -------------------------
    -- Create_Direction_2D --
@@ -18,7 +39,7 @@ package body CGK.Primitives.Directions_2D is
    function Create_Direction_2D
      (X : CGK.Reals.Real; Y : CGK.Reals.Real) return Direction_2D
    is
-      D : constant Real := Elementary_Functions.Sqrt (X * X + Y * Y);
+      D : constant Real := Sqrt (X * X + Y * Y);
 
    begin
       Assert_Construction_Error (D > Resolution);
@@ -36,6 +57,18 @@ package body CGK.Primitives.Directions_2D is
    begin
       return Create_Direction_2D (X (XY), Y (XY));
    end Create_Direction_2D;
+
+   --------------
+   -- Is_Equal --
+   --------------
+
+   function Is_Equal
+     (Self              : Direction_2D;
+      Other             : Direction_2D;
+      Angular_Tolarance : CGK.Reals.Real) return Boolean is
+   begin
+      return abs Angle (Self, Other) <= Angular_Tolarance;
+   end Is_Equal;
 
    -------------------
    -- Unchecked_Set --

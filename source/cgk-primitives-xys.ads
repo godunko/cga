@@ -41,6 +41,14 @@ package CGK.Primitives.XYs is
    function Modulus (Self : XY) return CGK.Reals.Real with Inline;
    --  Returns Sqrt (X * X + Y * Y)
 
+   function Dot_Product
+     (Self : XY; Other : XY) return CGK.Reals.Real with Inline;
+   --  Returns scalar product of two vectors.
+
+   function Cross_Product
+     (Self : XY; Other : XY) return CGK.Reals.Real with Inline;
+   --  Returns screw product of two vectors.
+
 private
 
    type XY is record
