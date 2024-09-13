@@ -1,12 +1,12 @@
 --
---  Copyright (C) 2023, Vadim Godunko <vgodunko@gmail.com>
+--  Copyright (C) 2023-2024, Vadim Godunko <vgodunko@gmail.com>
 --
 --  SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 --
 
 --  Containers of Point_2D objects.
 
-with CGK.Internals.Generic_Sequences;
+--  with CGK.Internals.Generic_Sequences;
 
 package CGK.Primitives.Points_2D.Containers is
 
@@ -20,9 +20,9 @@ package CGK.Primitives.Points_2D.Containers is
 
    type Point_2D_Array is array (Point_2D_Array_Index range <>) of Point_2D;
 
-   package Point_2D_Sequences is
-     new CGK.Internals.Generic_Sequences (Point_2D_Array_Index, Point_2D);
-
-   subtype Point_2D_Sequence is Point_2D_Sequences.Sequence;
+   --  package Point_2D_Sequences is
+   --    new CGK.Internals.Generic_Sequences (Point_2D_Array_Index, Point_2D);
+   --
+   --  subtype Point_2D_Sequence is Point_2D_Sequences.Sequence;
 
 end CGK.Primitives.Points_2D.Containers;
