@@ -1,5 +1,4 @@
-# cga
-Computational Geometry Kernel
+# Computational Geometry Kernel
 
 Project structure
 -----------------
