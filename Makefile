@@ -2,7 +2,7 @@
 all: build_native
 
 clean:
-	rm -rf .obj
+	rm -rf .objs
 
 build_native:
 	gprbuild -P gnat/cgk_primitives.gpr

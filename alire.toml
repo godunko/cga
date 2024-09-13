@@ -14,3 +14,6 @@ project-files = ["gnat/cgk_primitives.gpr"]
 generate_ada = false
 generate_c = false
 generate_gpr = true
+
+[configuration.variables]
+Float_Size = {type = "Enum", values = ["32", "64"], default = "64"}

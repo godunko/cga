@@ -1,5 +1,5 @@
 --
---  Copyright (C) 2023, Vadim Godunko <vgodunko@gmail.com>
+--  Copyright (C) 2023-2024, Vadim Godunko <vgodunko@gmail.com>
 --
 --  SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 --
@@ -10,7 +10,7 @@ package CGK.Reals is
 
    pragma Pure;
 
-   type Real is new Interfaces.IEEE_Float_64;
+   type Real is new Interfaces.IEEE_Float_32;
 
    function Resolution return Real is (Real'Model_Small);
    --  Tolerance criterion for geometric computations.
