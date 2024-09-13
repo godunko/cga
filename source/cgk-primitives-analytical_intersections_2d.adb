@@ -15,7 +15,7 @@ package body CGK.Primitives.Analytical_Intersections_2D is
    use CGK.Primitives.Vectors_2D;
    use CGK.Reals;
 
-   procedure Invalidate (Self : in out Intersection_2D);
+   procedure Invalidate (Self : in out Analytical_Intersection_2D);
    --  Invalidate state of the object
 
    procedure Swap (A : in out Real; B : in out Real) with Inline;
@@ -26,9 +26,10 @@ package body CGK.Primitives.Analytical_Intersections_2D is
 
    function Create_Intersection
      (Circle_1 : CGK.Primitives.Circles_2D.Circle_2D;
-      Circle_2 : CGK.Primitives.Circles_2D.Circle_2D) return Intersection_2D is
+      Circle_2 : CGK.Primitives.Circles_2D.Circle_2D)
+      return Analytical_Intersection_2D is
    begin
-      return Result : Intersection_2D do
+      return Result : Analytical_Intersection_2D do
          Intersect (Result, Circle_1, Circle_2);
       end return;
    end Create_Intersection;
@@ -38,7 +39,7 @@ package body CGK.Primitives.Analytical_Intersections_2D is
    ---------------
 
    procedure Intersect
-     (Self   : in out Intersection_2D;
+     (Self   : in out Analytical_Intersection_2D;
       Line_1 : CGK.Primitives.Lines_2D.Line_2D;
       Line_2 : CGK.Primitives.Lines_2D.Line_2D)
    is
@@ -126,7 +127,7 @@ package body CGK.Primitives.Analytical_Intersections_2D is
    ---------------
 
    procedure Intersect
-     (Self     : in out Intersection_2D;
+     (Self     : in out Analytical_Intersection_2D;
       Circle_1 : CGK.Primitives.Circles_2D.Circle_2D;
       Circle_2 : CGK.Primitives.Circles_2D.Circle_2D)
    is
@@ -247,7 +248,7 @@ package body CGK.Primitives.Analytical_Intersections_2D is
    -- Invalidate --
    ----------------
 
-   procedure Invalidate (Self : in out Intersection_2D) is
+   procedure Invalidate (Self : in out Analytical_Intersection_2D) is
    begin
       Self.Valid := False;
    end Invalidate;
@@ -256,7 +257,8 @@ package body CGK.Primitives.Analytical_Intersections_2D is
    -- Is_Identical_Elements --
    ---------------------------
 
-   function Is_Identical_Elements (Self : Intersection_2D) return Boolean is
+   function Is_Identical_Elements
+     (Self : Analytical_Intersection_2D) return Boolean is
    begin
       Assert_Invalid_State_Error (Self.Valid);
 
@@ -267,7 +269,8 @@ package body CGK.Primitives.Analytical_Intersections_2D is
    -- Is_Parallel_Elements --
    --------------------------
 
-   function Is_Parallel_Elements (Self : Intersection_2D) return Boolean is
+   function Is_Parallel_Elements
+     (Self : Analytical_Intersection_2D) return Boolean is
    begin
       Assert_Invalid_State_Error (Self.Valid);
 
@@ -278,7 +281,7 @@ package body CGK.Primitives.Analytical_Intersections_2D is
    -- Is_Valid --
    --------------
 
-   function Is_Valid (Self : Intersection_2D) return Boolean is
+   function Is_Valid (Self : Analytical_Intersection_2D) return Boolean is
    begin
       return Self.Valid;
    end Is_Valid;
@@ -288,7 +291,7 @@ package body CGK.Primitives.Analytical_Intersections_2D is
    ------------
 
    function Length
-     (Self : Intersection_2D)
+     (Self : Analytical_Intersection_2D)
       return CGK.Primitives.Points_2D.Containers.Point_2D_Array_Count is
    begin
       Assert_Invalid_State_Error (Self.Valid);
@@ -301,7 +304,7 @@ package body CGK.Primitives.Analytical_Intersections_2D is
    -----------
 
    function Point
-     (Self  : Intersection_2D;
+     (Self  : Analytical_Intersection_2D;
       Index : CGK.Primitives.Points_2D.Containers.Point_2D_Array_Index)
       return CGK.Primitives.Points_2D.Point_2D is
    begin
@@ -319,7 +322,7 @@ package body CGK.Primitives.Analytical_Intersections_2D is
    ------------
 
    function Points
-     (Self : Intersection_2D)
+     (Self : Analytical_Intersection_2D)
       return CGK.Primitives.Points_2D.Containers.Point_2D_Array is
    begin
       Assert_Invalid_State_Error (Self.Valid);

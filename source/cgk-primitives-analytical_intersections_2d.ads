@@ -1,8 +1,10 @@
 --
---  Copyright (C) 2023, Vadim Godunko <vgodunko@gmail.com>
+--  Copyright (C) 2023-2024, Vadim Godunko <vgodunko@gmail.com>
 --
 --  SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 --
+
+--  Analytical intersections of 2D primitives.
 
 with CGK.Primitives.Circles_2D;
 with CGK.Primitives.Lines_2D;
@@ -12,39 +14,41 @@ package CGK.Primitives.Analytical_Intersections_2D is
 
    pragma Preelaborate;
 
-   type Intersection_2D is private;
+   type Analytical_Intersection_2D is private;
 
    function Create_Intersection
      (Circle_1 : CGK.Primitives.Circles_2D.Circle_2D;
-      Circle_2 : CGK.Primitives.Circles_2D.Circle_2D) return Intersection_2D;
+      Circle_2 : CGK.Primitives.Circles_2D.Circle_2D)
+      return Analytical_Intersection_2D;
 
    procedure Intersect
-     (Self   : in out Intersection_2D;
+     (Self   : in out Analytical_Intersection_2D;
       Line_1 : CGK.Primitives.Lines_2D.Line_2D;
       Line_2 : CGK.Primitives.Lines_2D.Line_2D);
 
    procedure Intersect
-     (Self     : in out Intersection_2D;
+     (Self     : in out Analytical_Intersection_2D;
       Circle_1 : CGK.Primitives.Circles_2D.Circle_2D;
       Circle_2 : CGK.Primitives.Circles_2D.Circle_2D);
 
-   function Is_Valid (Self : Intersection_2D) return Boolean with Inline;
+   function Is_Valid
+     (Self : Analytical_Intersection_2D) return Boolean with Inline;
    --  Returns True when object contains valid data.
 
    function Is_Identical_Elements
-     (Self : Intersection_2D) return Boolean with Inline;
+     (Self : Analytical_Intersection_2D) return Boolean with Inline;
    --  Returns True when elements are identical.
    --
    --  @exception Invalid_State_Error
 
    function Is_Parallel_Elements
-     (Self : Intersection_2D) return Boolean with Inline;
+     (Self : Analytical_Intersection_2D) return Boolean with Inline;
    --  Returns True when elements are parallel.
    --
    --  @exception Invalid_State_Error
 
    function Length
-     (Self : Intersection_2D)
+     (Self : Analytical_Intersection_2D)
       return CGK.Primitives.Points_2D.Containers.Point_2D_Array_Count
         with Inline;
    --  Returns the number of intersection points.
@@ -52,7 +56,7 @@ package CGK.Primitives.Analytical_Intersections_2D is
    --  @exception Invalid_State_Error
 
    function Point
-     (Self  : Intersection_2D;
+     (Self  : Analytical_Intersection_2D;
       Index : CGK.Primitives.Points_2D.Containers.Point_2D_Array_Index)
       return CGK.Primitives.Points_2D.Point_2D with Inline;
    --  Returns the intersection point of given Index.
@@ -61,7 +65,7 @@ package CGK.Primitives.Analytical_Intersections_2D is
    --  @exception Invalid_State_Error
 
    function Points
-     (Self : Intersection_2D)
+     (Self : Analytical_Intersection_2D)
       return CGK.Primitives.Points_2D.Containers.Point_2D_Array;
    --  Returns array of intersection points.
    --
@@ -71,7 +75,7 @@ private
 
    use CGK.Primitives.Points_2D.Containers;
 
-   type Intersection_2D is record
+   type Analytical_Intersection_2D is record
       Valid     : Boolean := False;
       Identical : Boolean := False;
       Parallel  : Boolean := False;
