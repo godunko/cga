@@ -1,5 +1,5 @@
 --
---  Copyright (C) 2023, Vadim Godunko <vgodunko@gmail.com>
+--  Copyright (C) 2023-2024, Vadim Godunko <vgodunko@gmail.com>
 --
 --  SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 --
@@ -44,6 +44,18 @@ package body CGK.Primitives.Points_2D is
    begin
       return Elementary_Functions.Sqrt (DX * DX + DY * DY);
    end Distance;
+
+   --------------
+   -- Is_Equal --
+   --------------
+
+   function Is_Equal
+     (Self             : Point_2D;
+      Other            : Point_2D;
+      Linear_Tolarance : CGK.Reals.Real) return Boolean is
+   begin
+      return Distance (Self, Other) <= Linear_Tolarance;
+   end Is_Equal;
 
    -------
    -- X --

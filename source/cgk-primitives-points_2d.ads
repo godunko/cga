@@ -1,5 +1,5 @@
 --
---  Copyright (C) 2023, Vadim Godunko <vgodunko@gmail.com>
+--  Copyright (C) 2023-2024, Vadim Godunko <vgodunko@gmail.com>
 --
 --  SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 --
@@ -35,6 +35,13 @@ package CGK.Primitives.Points_2D is
      (Point_1 : Point_2D;
       Point_2 : Point_2D) return CGK.Reals.Real with Inline;
    --  Computes the distance between two points.
+
+   function Is_Equal
+     (Self             : Point_2D;
+      Other            : Point_2D;
+      Linear_Tolarance : CGK.Reals.Real) return Boolean;
+   --  Returns True when distance between given points are less or equal to
+   --  given linear tolerance.
 
 private
 
