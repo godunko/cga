@@ -19,6 +19,11 @@ package CGK.Primitives.Directions_2D.Builders is
 
    procedure Build
      (Self : in out Direction_2D_Builder;
+      X    : CGK.Reals.Real;
+      Y    : CGK.Reals.Real);
+
+   procedure Build
+     (Self : in out Direction_2D_Builder;
       From : CGK.Primitives.Points_2D.Point_2D;
       To   : CGK.Primitives.Points_2D.Point_2D);
 

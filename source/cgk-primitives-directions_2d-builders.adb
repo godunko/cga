@@ -18,6 +18,18 @@ package body CGK.Primitives.Directions_2D.Builders is
    -----------
 
    procedure Build
+     (Self : in out Direction_2D_Builder;
+      X    : CGK.Reals.Real;
+      Y    : CGK.Reals.Real) is
+   begin
+      Build (Self, Create_XY (X, Y));
+   end Build;
+
+   -----------
+   -- Build --
+   -----------
+
+   procedure Build
      (Self : in out Direction_2D_Builder; XY : CGK.Primitives.XYs.XY)
    is
       D : constant Real := Modulus (XY);
@@ -40,20 +52,9 @@ package body CGK.Primitives.Directions_2D.Builders is
    procedure Build
      (Self : in out Direction_2D_Builder;
       From : CGK.Primitives.Points_2D.Point_2D;
-      To   : CGK.Primitives.Points_2D.Point_2D)
-   is
-      V : constant XYs.XY := XY (To) - XY (From);
-      D : constant Real   := Modulus (V);
-
+      To   : CGK.Primitives.Points_2D.Point_2D) is
    begin
-      Invalidate (Self);
-
-      if D <= Resolution then
-         return;
-      end if;
-
-      Unchecked_Set (Self.Result, V / D);
-      Self.Valid := True;
+      Build (Self, XY (To) - XY (From));
    end Build;
 
    ---------------
