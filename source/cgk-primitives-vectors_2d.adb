@@ -1,5 +1,5 @@
 --
---  Copyright (C) 2023, Vadim Godunko <vgodunko@gmail.com>
+--  Copyright (C) 2023-2024, Vadim Godunko <vgodunko@gmail.com>
 --
 --  SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 --
@@ -38,6 +38,15 @@ package body CGK.Primitives.Vectors_2D is
       return
         (Coordinates => Points_2D.XY (Point_2) - Points_2D.XY (Point_1));
    end Create_Vector_2D;
+
+   ---------------
+   -- Magnitude --
+   ---------------
+
+   function Magnitude (Self : Vector_2D) return CGk.Reals.Real is
+   begin
+      return Modulus (Self.Coordinates);
+   end Magnitude;
 
    -------
    -- X --

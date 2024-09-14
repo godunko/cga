@@ -32,6 +32,9 @@ package CGK.Primitives.Vectors_2D is
 
    function "-" (Self : Vector_2D) return Vector_2D with Inline;
 
+   function Magnitude (Self : Vector_2D) return CGk.Reals.Real with Inline;
+   --  Returns magnitude of the vector.
+
 private
 
    type Vector_2D is record
