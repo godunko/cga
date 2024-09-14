@@ -13,7 +13,7 @@ package CGK.Primitives.XYs is
 
    pragma Pure;
 
-   type XY is private;
+   type XY is private with Preelaborable_Initialization;
 
    function Create_XY
      (X : CGK.Reals.Real; Y : CGK.Reals.Real) return XY with Inline_Always;
