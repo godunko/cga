@@ -4,6 +4,7 @@
 --  SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 --
 
+with CGK.Primitives.Vectors_2D;
 with CGK.Reals.Elementary_Functions;
 
 package body CGK.Primitives.Points_2D is
@@ -56,6 +57,17 @@ package body CGK.Primitives.Points_2D is
    begin
       return Distance (Self, Other) <= Linear_Tolarance;
    end Is_Equal;
+
+   ---------------
+   -- Translate --
+   ---------------
+
+   procedure Translate
+     (Self   : in out Point_2D;
+      Offset : CGK.Primitives.Vectors_2D.Vector_2D) is
+   begin
+      Self.Coordinates := @ + CGK.Primitives.Vectors_2D.XY (Offset);
+   end Translate;
 
    -------
    -- X --

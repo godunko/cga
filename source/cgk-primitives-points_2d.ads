@@ -6,6 +6,7 @@
 
 --  Point in 2D cartesian space.
 
+limited with CGK.Primitives.Vectors_2D;
 with CGK.Primitives.XYs;
 with CGK.Reals;
 
@@ -42,6 +43,11 @@ package CGK.Primitives.Points_2D is
       Linear_Tolarance : CGK.Reals.Real) return Boolean;
    --  Returns True when distance between given points are less or equal to
    --  given linear tolerance.
+
+   procedure Translate
+     (Self   : in out Point_2D;
+      Offset : CGK.Primitives.Vectors_2D.Vector_2D);
+   --  Translate a point in the direction of the vector on vector's magnitude.
 
 private
 

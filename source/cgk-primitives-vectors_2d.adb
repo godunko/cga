@@ -7,6 +7,7 @@
 package body CGK.Primitives.Vectors_2D is
 
    use CGK.Primitives.XYs;
+   use CGK.Reals;
 
    ---------
    -- "-" --
@@ -48,6 +49,15 @@ package body CGK.Primitives.Vectors_2D is
       return Modulus (Self.Coordinates);
    end Magnitude;
 
+   ------------
+   -- Normal --
+   ------------
+
+   function Normal (Self : Vector_2D) return Vector_2D is
+   begin
+      return (Coordinates => Create_XY (X => Y (Self), Y => -X (Self)));
+   end Normal;
+
    -------
    -- X --
    -------
@@ -56,6 +66,15 @@ package body CGK.Primitives.Vectors_2D is
    begin
       return X (Self.Coordinates);
    end X;
+
+   --------
+   -- XY --
+   --------
+
+   function XY (Self : Vector_2D) return CGK.Primitives.XYs.XY is
+   begin
+      return Self.Coordinates;
+   end XY;
 
    -------
    -- Y --

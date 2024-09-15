@@ -1,5 +1,5 @@
 --
---  Copyright (C) 2023, Vadim Godunko <vgodunko@gmail.com>
+--  Copyright (C) 2023-2024, Vadim Godunko <vgodunko@gmail.com>
 --
 --  SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 --
@@ -7,7 +7,7 @@
 --  Vector in 2D space.
 
 with CGK.Primitives.Points_2D;
-private with CGK.Primitives.XYs;
+with CGK.Primitives.XYs;
 with CGK.Reals;
 
 package CGK.Primitives.Vectors_2D is
@@ -30,10 +30,16 @@ package CGK.Primitives.Vectors_2D is
    function Y (Self : Vector_2D) return CGK.Reals.Real with Inline;
    --  Returns Y coordinate.
 
+   function XY (Self : Vector_2D) return CGK.Primitives.XYs.XY with Inline;
+   --  Returns X and Y coordinates.
+
    function "-" (Self : Vector_2D) return Vector_2D with Inline;
 
    function Magnitude (Self : Vector_2D) return CGk.Reals.Real with Inline;
    --  Returns magnitude of the vector.
+
+   function Normal (Self : Vector_2D) return Vector_2D with Inline;
+   --  Returns normal vector to given vector.
 
 private
 
