@@ -16,6 +16,15 @@ package body CGK.Primitives.XYs is
    -- "*" --
    ---------
 
+   function "*" (Left : XY; Right : CGK.Reals.Real) return XY is
+   begin
+      return (Value => Left.Value * Right);
+   end "*";
+
+   ---------
+   -- "*" --
+   ---------
+
    function "*" (Left : CGK.Reals.Real; Right : XY) return XY is
    begin
       return (Value => Left * Right.Value);

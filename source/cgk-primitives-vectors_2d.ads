@@ -35,11 +35,23 @@ package CGK.Primitives.Vectors_2D is
 
    function "-" (Self : Vector_2D) return Vector_2D with Inline;
 
-   function Magnitude (Self : Vector_2D) return CGk.Reals.Real with Inline;
+   function "*"
+     (Left : Vector_2D; Right : CGK.Reals.Real) return Vector_2D with Inline;
+   --  Multiply vector by scalar.
+
+   function Magnitude (Self : Vector_2D) return CGK.Reals.Real with Inline;
    --  Returns magnitude of the vector.
 
    function Normal (Self : Vector_2D) return Vector_2D with Inline;
    --  Returns normal vector to given vector.
+
+   function Dot (Self : Vector_2D; Other : Vector_2D) return CGK.Reals.Real
+     with Inline;
+   --  Scalar product of two vestors.
+
+   function Cross (Self : Vector_2D; Other : Vector_2D) return CGK.Reals.Real
+     with Inline;
+   --  Cross product of two vectors.
 
 private
 

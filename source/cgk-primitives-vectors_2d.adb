@@ -10,6 +10,16 @@ package body CGK.Primitives.Vectors_2D is
    use CGK.Reals;
 
    ---------
+   -- "*" --
+   ---------
+
+   function "*"
+     (Left : Vector_2D; Right : CGK.Reals.Real) return Vector_2D is
+   begin
+      return (Coordinates => Left.Coordinates * Right);
+   end "*";
+
+   ---------
    -- "-" --
    ---------
 
@@ -39,6 +49,25 @@ package body CGK.Primitives.Vectors_2D is
       return
         (Coordinates => Points_2D.XY (Point_2) - Points_2D.XY (Point_1));
    end Create_Vector_2D;
+
+   -----------
+   -- Cross --
+   -----------
+
+   function Cross
+     (Self : Vector_2D; Other : Vector_2D) return CGK.Reals.Real is
+   begin
+      return Cross_Product (Self.Coordinates, Other.Coordinates);
+   end Cross;
+
+   ---------
+   -- Dot --
+   ---------
+
+   function Dot (Self : Vector_2D; Other : Vector_2D) return CGK.Reals.Real is
+   begin
+      return Dot_Product (Self.Coordinates, Other.Coordinates);
+   end Dot;
 
    ---------------
    -- Magnitude --

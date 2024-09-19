@@ -32,6 +32,9 @@ package CGK.Primitives.XYs is
    function "-" (Left : XY; Right : XY) return XY with Inline;
    --  Subtract components
 
+   function "*" (Left : XY; Right : CGK.Reals.Real) return XY with Inline;
+   --  Multiply components by scalar.
+
    function "*" (Left : CGK.Reals.Real; Right : XY) return XY with Inline;
    --  Multiply components by scalar.
 
