@@ -35,4 +35,8 @@ package CGK.Mathematics.Vectors_2 is
    function "/"
      (Left : Vector_2; Right : CGK.Reals.Real) return Vector_2 with Inline;
 
+   function "*"
+     (Left  : CGK.Mathematics.Matrices_2x2.Matrix_2x2;
+      Right : Vector_2) return Vector_2 with Inline;
+
 end CGK.Mathematics.Vectors_2;

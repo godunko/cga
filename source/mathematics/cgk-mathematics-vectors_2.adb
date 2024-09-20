@@ -4,9 +4,25 @@
 --  SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 --
 
+with CGK.Mathematics.Matrices_2x2;
+
 package body CGK.Mathematics.Vectors_2 is
 
    use CGK.Reals;
+
+   ---------
+   -- "*" --
+   ---------
+
+   function "*"
+     (Left  : CGK.Mathematics.Matrices_2x2.Matrix_2x2;
+      Right : Vector_2) return Vector_2 is
+   begin
+      return
+        [0 => Left (0, 0) * Right (0) + Left (0, 1) * Right (1),
+         1 => Left (1, 0) * Right (1) + Left (1, 1) * Right (1)];
+   end "*";
+
 
    ---------
    -- "*" --
