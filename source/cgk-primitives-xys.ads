@@ -54,8 +54,6 @@ package CGK.Primitives.XYs is
 
 private
 
-   type XY is record
-      Value : CGK.Mathematics.Vectors_2.Vector_2;
-   end record;
+   type XY is new CGK.Mathematics.Vectors_2.Vector_2;
 
 end CGK.Primitives.XYs;
