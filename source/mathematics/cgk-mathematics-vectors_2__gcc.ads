@@ -4,6 +4,9 @@
 --  SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 --
 
+--  This version lets GCC to optimize code to use processor's SIMD
+--  instructions.
+
 with CGK.Reals;
 
 package CGK.Mathematics.Vectors_2 is

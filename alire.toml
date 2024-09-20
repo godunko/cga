@@ -17,3 +17,4 @@ generate_gpr = true
 
 [configuration.variables]
 Float_Size = {type = "Enum", values = ["32", "64"], default = "64"}
+SIMD = {type = "Enum", values = ["nosimd", "gcc"], default = "gcc"}

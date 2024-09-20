@@ -31,6 +31,14 @@ project CGK_Primitives is
             for Specification ("CGK.Reals") use "cgk-reals__64.ads";
             for Implementation ("CGK.Reals") use "cgk-reals__64.adb";
       end case;
+
+      case CGK_Config.SIMD is
+         when "nosimd" =>
+            for Specification ("CGK.Mathematics.Vectors_2") use "cgk-mathematics-vectors_2__nosimd.ads";
+
+         when "gcc" =>
+            for Specification ("CGK.Mathematics.Vectors_2") use "cgk-mathematics-vectors_2__gcc.ads";
+      end case;
    end Naming;
 
 end CGK_Primitives;
