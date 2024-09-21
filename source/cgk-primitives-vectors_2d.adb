@@ -28,6 +28,16 @@ package body CGK.Primitives.Vectors_2D is
       return (Coordinates => -Self.Coordinates);
    end "-";
 
+   ---------
+   -- "/" --
+   ---------
+
+   function "/"
+     (Left : Vector_2D; Right : CGK.Reals.Real) return Vector_2D is
+   begin
+      return (Coordinates => Left.Coordinates / Right);
+   end "/";
+
    ----------------------
    -- Create_Vector_2D --
    ----------------------

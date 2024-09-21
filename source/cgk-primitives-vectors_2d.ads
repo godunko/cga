@@ -39,6 +39,10 @@ package CGK.Primitives.Vectors_2D is
      (Left : Vector_2D; Right : CGK.Reals.Real) return Vector_2D with Inline;
    --  Multiply vector by scalar.
 
+   function "/"
+     (Left : Vector_2D; Right : CGK.Reals.Real) return Vector_2D with Inline;
+   --  Divide vector by scalar.
+
    function Magnitude (Self : Vector_2D) return CGK.Reals.Real with Inline;
    --  Returns magnitude of the vector.
 
