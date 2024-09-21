@@ -6,6 +6,7 @@
 
 --  This is version for processors without SIMD support.
 
+limited with CGK.Mathematics.Matrices_2x2;
 with CGK.Reals;
 
 package CGK.Mathematics.Vectors_2 is
