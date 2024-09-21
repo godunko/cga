@@ -10,7 +10,7 @@ private with CGK.Mathematics.Matrices_2x2;
 private with CGK.Mathematics.Vectors_2;
 limited with CGK.Primitives.Points_2D;
 limited with CGK.Primitives.XYs;
-limited with CGK.Reals;
+with CGK.Reals;
 
 package CGK.Primitives.Transformations_2D
   with Pure
