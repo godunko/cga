@@ -6,13 +6,14 @@
 
 --  Point in 2D cartesian space.
 
+limited with CGK.Primitives.Transformations_2D;
 limited with CGK.Primitives.Vectors_2D;
 with CGK.Primitives.XYs;
-with CGK.Reals;
+limited with CGK.Reals;
 
-package CGK.Primitives.Points_2D is
-
-   pragma Pure;
+package CGK.Primitives.Points_2D
+  with Pure
+is
 
    type Point_2D is private;
 
@@ -48,6 +49,11 @@ package CGK.Primitives.Points_2D is
      (Self   : in out Point_2D;
       Offset : CGK.Primitives.Vectors_2D.Vector_2D);
    --  Translate a point in the direction of the vector on vector's magnitude.
+
+   procedure Transform
+     (Self           : in out Point_2D;
+      Transformation : CGK.Primitives.Transformations_2D.Transformation_2D);
+   --  Transform point with given transformation.
 
 private
 
