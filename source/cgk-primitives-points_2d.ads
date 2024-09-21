@@ -15,7 +15,7 @@ package CGK.Primitives.Points_2D
   with Pure
 is
 
-   type Point_2D is private;
+   type Point_2D is private with Preelaborable_Initialization;
 
    function Create_Point_2D
      (X : CGK.Reals.Real; Y : CGK.Reals.Real) return Point_2D
