@@ -20,7 +20,7 @@ package body CGK.Mathematics.Vectors_2 is
    begin
       return
         [0 => Left (0, 0) * Right (0) + Left (0, 1) * Right (1),
-         1 => Left (1, 0) * Right (1) + Left (1, 1) * Right (1)];
+         1 => Left (1, 0) * Right (0) + Left (1, 1) * Right (1)];
    end "*";
 
 
