@@ -4,6 +4,7 @@
 --  SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 --
 
+with CGK.Primitives.Points_2D;
 with CGK.Primitives.XYs.Internals;
 with CGK.Reals.Elementary_Functions;
 
@@ -162,6 +163,27 @@ package body CGK.Primitives.Transformations_2D is
       Self.Kind   := Rotation;
       Set_Rotation (Self.Matrix, Angle);
       Self.Vector := [0.0, 0.0];
+   end Set_Rotation;
+
+   ------------------
+   -- Set_Rotation --
+   ------------------
+
+   procedure Set_Rotation
+     (Self  : out Transformation_2D;
+      Point : CGK.Primitives.Points_2D.Point_2D;
+      Angle : CGK.Reals.Real)
+   is
+      use CGK.Primitives.Points_2D;
+
+      Vector : constant Vector_2 := To_Vector_2 (XY (Point));
+
+   begin
+      Self.Kind   := Complex;
+      Set_Rotation (Self.Matrix, Angle);
+      Self.Vector := -Vector;
+      Self.Vector := Self.Matrix * @;
+      Self.Vector := @ + Vector;
    end Set_Rotation;
 
    ---------------------

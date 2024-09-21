@@ -8,8 +8,9 @@
 
 private with CGK.Mathematics.Matrices_2x2;
 private with CGK.Mathematics.Vectors_2;
-with CGK.Primitives.XYs;
-with CGK.Reals;
+limited with CGK.Primitives.Points_2D;
+limited with CGK.Primitives.XYs;
+limited with CGK.Reals;
 
 package CGK.Primitives.Transformations_2D
   with Pure
@@ -35,6 +36,12 @@ is
       Angle : CGK.Reals.Real);
    --  Set transformation to rotate around origin of the coordinate system by
    --  given angle.
+
+   procedure Set_Rotation
+     (Self  : out Transformation_2D;
+      Point : CGK.Primitives.Points_2D.Point_2D;
+      Angle : CGK.Reals.Real);
+   --  Set transformation to rotate around given point by given angle.
 
    procedure Multiply
      (Self : in out Transformation_2D;
