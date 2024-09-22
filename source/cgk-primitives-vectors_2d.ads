@@ -16,6 +16,9 @@ package CGK.Primitives.Vectors_2D is
 
    type Vector_2D is private;
 
+   function Create_Vector_2D (XY : CGK.Primitives.XYs.XY) return Vector_2D
+     with Inline;
+
    function Create_Vector_2D
      (X : CGK.Reals.Real; Y : CGK.Reals.Real) return Vector_2D;
 

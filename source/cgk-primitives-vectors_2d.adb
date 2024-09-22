@@ -42,6 +42,15 @@ package body CGK.Primitives.Vectors_2D is
    -- Create_Vector_2D --
    ----------------------
 
+   function Create_Vector_2D (XY : CGK.Primitives.XYs.XY) return Vector_2D is
+   begin
+      return (Coordinates => XY);
+   end Create_Vector_2D;
+
+   ----------------------
+   -- Create_Vector_2D --
+   ----------------------
+
    function Create_Vector_2D
      (X : CGK.Reals.Real; Y : CGK.Reals.Real) return Vector_2D is
    begin
