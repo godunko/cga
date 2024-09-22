@@ -19,6 +19,24 @@ package body CGK.Primitives.Transformations_2D is
      (Matrix : in out CGK.Mathematics.Matrices_2x2.Matrix_2x2;
       Angle  : CGK.Reals.Real);
 
+   -----------------
+   -- Is_Identity --
+   -----------------
+
+   function Is_Identity (Self : Transformation_2D) return Boolean is
+   begin
+      return Self.Kind = Identity;
+   end Is_Identity;
+
+   --------------------
+   -- Is_Translation --
+   --------------------
+
+   function Is_Translation (Self : Transformation_2D) return Boolean is
+   begin
+      return Self.Kind = Translation;
+   end Is_Translation;
+
    --------------
    -- Multiply --
    --------------
@@ -256,5 +274,15 @@ package body CGK.Primitives.Transformations_2D is
             Self.Vector := @ + Self.Matrix * Vector;
       end case;
    end Translate;
+
+   ---------------------------
+   -- Translation_Component --
+   ---------------------------
+
+   function Translation_Component
+     (Self : Transformation_2D) return CGK.Primitives.XYs.XY is
+   begin
+      return To_XY (Self.Vector);
+   end Translation_Component;
 
 end CGK.Primitives.Transformations_2D;

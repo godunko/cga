@@ -23,6 +23,18 @@ is
      (Self : Transformation_2D;
       XY   : CGK.Primitives.XYs.XY) return CGK.Primitives.XYs.XY;
 
+   function Is_Identity (Self : Transformation_2D) return Boolean
+     with Inline_Always;
+   --  Returns True when transformation is identity.
+
+   function Is_Translation (Self : Transformation_2D) return Boolean
+     with Inline_Always;
+   --  Returns True when transformation is translation only.
+
+   function Translation_Component
+     (Self : Transformation_2D) return CGK.Primitives.XYs.XY with Inline;
+   --  Returns translation component of the transformation.
+
    procedure Set_Identity (Self : out Transformation_2D);
    --  Set transformation to identity
 
