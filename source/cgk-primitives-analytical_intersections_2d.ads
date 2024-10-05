@@ -52,6 +52,12 @@ package CGK.Primitives.Analytical_Intersections_2D is
    --
    --  @exception Invalid_State_Error
 
+   function Is_Disjoint_Elements
+     (Self : Analytical_Intersection_2D) return Boolean with Inline;
+   --  Returns True when elements are disjoint.
+   --
+   --  @exception Invalid_State_Error
+
    function Length
      (Self : Analytical_Intersection_2D)
       return CGK.Primitives.Points_2D.Containers.Point_2D_Array_Count
@@ -80,10 +86,12 @@ private
 
    use CGK.Primitives.Points_2D.Containers;
 
+   type Relations is
+     (Invalid, Disjoint, Identical, Intersects, Touches, Overlaps, Contains);
+
    type Analytical_Intersection_2D is record
-      Valid     : Boolean := False;
-      Identical : Boolean := False;
-      Parallel  : Boolean := False;
+      Relation  : Relations            := Invalid;
+      Parallel  : Boolean              := False;
       Length    : Point_2D_Array_Count := 0;
       Points    : Point_2D_Array (1 .. 4);
    end record;

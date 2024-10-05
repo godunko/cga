@@ -98,14 +98,16 @@ package body CGK.Primitives.Analytical_Intersections_2D is
       Denom := BE2 - Rap * BE1;
 
       if abs Denom <= Real'Model_Epsilon then
-         Self.Parallel  := True;
-         Self.Identical := abs (GA2 - Rap * GA1) <= Real'Model_Epsilon;
-         Self.Length    := 0;
+         Self.Relation :=
+           (if abs (GA2 - Rap * GA1) <= Real'Model_Epsilon
+              then Identical else Disjoint);
+         Self.Parallel := True;
+         Self.Length   := 0;
 
       else
-         Self.Parallel  := False;
-         Self.Identical := False;
-         Self.Length    := 1;
+         Self.Relation := Intersects;
+         Self.Parallel := False;
+         Self.Length   := 1;
 
          XS := (BE1 * GA2 / AL1 - BE2 * GA1 / AL1) / Denom;
          YS := (Rap * GA1 - GA2) / Denom;
@@ -118,8 +120,6 @@ package body CGK.Primitives.Analytical_Intersections_2D is
 
          Self.Points (1) := Create_Point_2D (XS, YS);
       end if;
-
-      Self.Valid := True;
    end Intersect;
 
    ---------------
@@ -143,16 +143,17 @@ package body CGK.Primitives.Analytical_Intersections_2D is
       if Dist <= Real'Model_Epsilon then
          --  Circles are parallel or identical, no intersection points
 
-         Self.Parallel  := True;
-         Self.Identical := Dif <= Real'Model_Epsilon;
-         Self.Length    := 0;
+         Self.Relation :=
+           (if Dif <= Real'Model_Epsilon then Identical else Contains);
+         Self.Parallel := True;
+         Self.Length   := 0;
 
       elsif Dist - Sum > Epsilon (Sum) then
          --  Circles are outside of each other, no intersection points
 
-         Self.Parallel  := False;
-         Self.Identical := False;
-         Self.Length    := 0;
+         Self.Relation := Disjoint;
+         Self.Parallel := False;
+         Self.Length   := 0;
 
       elsif abs (Dist - Sum) <= Epsilon (Sum) then
          --  Circles are exterious, single tangential point
@@ -164,9 +165,9 @@ package body CGK.Primitives.Analytical_Intersections_2D is
               (Y (Center (Circle_1)) * R2 + Y (Center (Circle_2)) * R1) / Sum;
 
          begin
-            Self.Parallel  := False;
-            Self.Identical := False;
-            Self.Length    := 1;
+            Self.Relation := Touches;
+            Self.Parallel := False;
+            Self.Length   := 1;
 
             Self.Points (1) := Create_Point_2D (XS, YS);
          end;
@@ -186,9 +187,9 @@ package body CGK.Primitives.Analytical_Intersections_2D is
             YS2 : Real;
 
          begin
-            Self.Parallel  := False;
-            Self.Identical := False;
-            Self.Length    := 2;
+            Self.Relation := Overlaps;
+            Self.Parallel := False;
+            Self.Length   := 2;
 
             L := (Dist * Dist + R1 * R1 - R2 * R2) / (2.0 * Dist);
             D := R1 * R1 - L * L;
@@ -217,9 +218,9 @@ package body CGK.Primitives.Analytical_Intersections_2D is
             YS : Real;
 
          begin
-            Self.Parallel  := False;
-            Self.Identical := False;
-            Self.Length    := 1;
+            Self.Relation := Contains;
+            Self.Parallel := False;
+            Self.Length   := 1;
 
             if Radius (Circle_1) < Radius (Circle_2) then
                A := -A;
@@ -236,12 +237,10 @@ package body CGK.Primitives.Analytical_Intersections_2D is
          end;
 
       else
-         Self.Parallel  := False;
-         Self.Identical := False;
-         Self.Length    := 0;
+         Self.Relation := Contains;
+         Self.Parallel := False;
+         Self.Length   := 0;
       end if;
-
-      Self.Valid := True;
    end Intersect;
 
    ---------------
@@ -266,16 +265,16 @@ package body CGK.Primitives.Analytical_Intersections_2D is
       if abs D - Radius (Circle) > Epsilon (Radius (Circle)) then
          --  No intersection
 
-         Self.Identical := False;
-         Self.Parallel  := False;
-         Self.Length    := 0;
+         Self.Relation := Disjoint;
+         Self.Parallel := False;
+         Self.Length   := 0;
 
       elsif abs (abs D - Radius (Circle)) <= Epsilon (Radius (Circle)) then
          --  Tangential, single intersection point
 
-         Self.Identical := False;
-         Self.Parallel  := False;
-         Self.Length    := 1;
+         Self.Relation := Touches;
+         Self.Parallel := False;
+         Self.Length   := 1;
 
          XS := X (Center (Circle)) - D * A;
          YS := Y (Center (Circle)) - D * B;
@@ -285,9 +284,9 @@ package body CGK.Primitives.Analytical_Intersections_2D is
       else
          --  Two intersection points
 
-         Self.Identical := False;
-         Self.Parallel  := False;
-         Self.Length    := 2;
+         Self.Relation := Overlaps;
+         Self.Parallel := False;
+         Self.Length   := 2;
 
          H :=
            Elementary_Functions.Sqrt
@@ -301,8 +300,6 @@ package body CGK.Primitives.Analytical_Intersections_2D is
          YS := Y (Center (Circle)) - D * B - H * A;
          Self.Points (2) := Create_Point_2D (XS, YS);
       end if;
-
-      Self.Valid := True;
    end Intersect;
 
    ----------------
@@ -311,8 +308,21 @@ package body CGK.Primitives.Analytical_Intersections_2D is
 
    procedure Invalidate (Self : in out Analytical_Intersection_2D) is
    begin
-      Self.Valid := False;
+      Self.Relation := Invalid;
+      Self.Parallel := False;
    end Invalidate;
+
+   --------------------------
+   -- Is_Disjoint_Elements --
+   --------------------------
+
+   function Is_Disjoint_Elements
+     (Self : Analytical_Intersection_2D) return Boolean is
+   begin
+      Assert_Invalid_State_Error (Self.Relation /= Invalid);
+
+      return Self.Relation = Disjoint;
+   end Is_Disjoint_Elements;
 
    ---------------------------
    -- Is_Identical_Elements --
@@ -321,9 +331,9 @@ package body CGK.Primitives.Analytical_Intersections_2D is
    function Is_Identical_Elements
      (Self : Analytical_Intersection_2D) return Boolean is
    begin
-      Assert_Invalid_State_Error (Self.Valid);
+      Assert_Invalid_State_Error (Self.Relation /= Invalid);
 
-      return Self.Identical;
+      return Self.Relation = Identical;
    end Is_Identical_Elements;
 
    --------------------------
@@ -333,7 +343,7 @@ package body CGK.Primitives.Analytical_Intersections_2D is
    function Is_Parallel_Elements
      (Self : Analytical_Intersection_2D) return Boolean is
    begin
-      Assert_Invalid_State_Error (Self.Valid);
+      Assert_Invalid_State_Error (Self.Relation /= Invalid);
 
       return Self.Parallel;
    end Is_Parallel_Elements;
@@ -344,7 +354,7 @@ package body CGK.Primitives.Analytical_Intersections_2D is
 
    function Is_Valid (Self : Analytical_Intersection_2D) return Boolean is
    begin
-      return Self.Valid;
+      return Self.Relation /= Invalid;
    end Is_Valid;
 
    ------------
@@ -355,7 +365,7 @@ package body CGK.Primitives.Analytical_Intersections_2D is
      (Self : Analytical_Intersection_2D)
       return CGK.Primitives.Points_2D.Containers.Point_2D_Array_Count is
    begin
-      Assert_Invalid_State_Error (Self.Valid);
+      Assert_Invalid_State_Error (Self.Relation /= Invalid);
 
       return Self.Length;
    end Length;
@@ -369,7 +379,7 @@ package body CGK.Primitives.Analytical_Intersections_2D is
       Index : CGK.Primitives.Points_2D.Containers.Point_2D_Array_Index)
       return CGK.Primitives.Points_2D.Point_2D is
    begin
-      Assert_Invalid_State_Error (Self.Valid);
+      Assert_Invalid_State_Error (Self.Relation /= Invalid);
 
       if Self.Length < Index then
          raise Constraint_Error;
@@ -386,7 +396,7 @@ package body CGK.Primitives.Analytical_Intersections_2D is
      (Self : Analytical_Intersection_2D)
       return CGK.Primitives.Points_2D.Containers.Point_2D_Array is
    begin
-      Assert_Invalid_State_Error (Self.Valid);
+      Assert_Invalid_State_Error (Self.Relation /= Invalid);
 
       return Self.Points (1 .. Self.Length);
    end Points;
